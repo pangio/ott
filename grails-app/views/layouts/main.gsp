@@ -1,31 +1,101 @@
-<!DOCTYPE html>
-<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
-<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
-<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"><!--<![endif]-->
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<title><g:layoutTitle default="Grails"/></title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
-		<link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
-		<link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
-		<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
-		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
+<%@ page import="com.pangio.ott.user.User" %>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Tasks Manager | <g:layoutTitle/></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--[if IE]>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap/jquery.ui.1.8.16.ie.css"/>
+    <![endif]-->
+    <link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
+    <link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
 
-        <r:require module="bootstrap"/>
-        <r:require module="application"/>
+    <g:javascript library="jquery" plugin="jquery" />
+    <r:require module="bootstrap"/>
+    <r:require module="application"/>
 
-		<g:layoutHead/>
-		<r:layoutResources />
-	</head>
-	<body>
-		<g:layoutBody/>
-		<div class="footer" role="contentinfo"></div>
-		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
-		<g:javascript library="application"/>
-		<r:layoutResources />
-	</body>
+    <r:script>
+        $(document).ready(function() {
+            $('.nav li.dropdown').hover(function() {
+                $(this).addClass('open');
+            }, function() {
+                $(this).removeClass('open');
+            });
+        });
+    </r:script>
+
+    <g:layoutHead/>
+    <r:layoutResources/>
+
+</head>
+
+<body>
+<header>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <div>
+                    <ul class="nav">
+                        <li><g:link uri="/" class="brand"><i class="icon-home icon-white"></i></g:link></li>
+                        %{--<li class="dropdown">--}%
+                            %{--<a class="dropdown-toggle" data-toggle="dropdown" href="#">lalalala<b class="caret"></b></a>--}%
+                            %{--<ul class="dropdown-menu">--}%
+                                %{--<li><g:link controller="project" action="list">Projects...</g:link></li>--}%
+                            %{--</ul>--}%
+                        %{--</li>--}%
+                        <li><g:link controller="project" action="list">Projects...</g:link></li>
+                    </ul>
+                </div>
+                <div class="pull-right">
+                    <p class="navbar-text pull-right">Version <g:meta name="app.version"/></p>
+                    <sec:ifLoggedIn>
+                        <ul class="nav pull-right">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <g:message code="welcome.user.label"/>
+                        <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <g:link controller="user" action="profile"><g:message code="default.profile.label"/></g:link>
+                            <g:link controller="logout" action="index"><g:message code="default.logout.label"/></g:link>
+                        </ul>
+                        </li>
+                    </sec:ifLoggedIn>
+                    <sec:ifNotLoggedIn>
+                        <p class="navbar-text pull-right">
+                            <g:link controller="login" action="index"> <g:message code="default.login.label"/> </g:link>
+                            <g:link controller="user" action="register"> <g:message code="default.register.label"/> </g:link>
+                        </p>
+                    </sec:ifNotLoggedIn>
+                </div>
+            </ul>
+            </p>
+
+            </div>
+        </div>
+    </div>
+</header>
+<section class="container">
+    <g:if test="${flash.message}">
+        <div class="alert alert-info">${flash.message}</div>
+        ${flash.clear()}
+    </g:if>
+    <g:elseif test="${flash.error}">
+        <div class="alert alert-error">${flash.error}</div>
+        ${flash.clear()}
+    </g:elseif>
+    <g:elseif test="${flash.success}">
+        <div class="alert alert-success">${flash.success}</div>
+        ${flash.clear()}
+    </g:elseif>
+    <g:layoutBody/>
+</section>
+
+<footer></footer>
+
+<r:layoutResources/>
+</body>
 </html>
