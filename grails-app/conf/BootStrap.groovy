@@ -1,21 +1,54 @@
 import com.pangio.ott.project.Project
 import com.pangio.ott.project.Task
+import com.pangio.ott.user.Role
 import com.pangio.ott.user.User
+import com.pangio.ott.user.UserRole
 
 class BootStrap {
 
     def init = { servletContext ->
 
+        generateAdmin()
         createUsers()
         createTasks()
         createProjects()
 
     }
 
+    private void generateAdmin(){
+
+        def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
+        def adminOtt= new User(
+                name: "admin",
+                lastname: "admin",
+                email: "admin@ott.com",
+                password: "pass",
+                enabled: true
+        ).save(flush: true)
+
+        UserRole.create(adminOtt, adminRole, true)
+
+    }
+
     def createUsers() {
-        def user = new User(name: 'Paul', lastName: 'Peter', email: 'paul.peter@gmail.com').save(flush: true)
-        user = new User(name: 'Peter', lastName: 'Pan', email: 'peter.pan@gmail.com').save(flush: true)
-        user = new User(name: 'John', lastName: 'Doe', email: 'john.doe@gmail.com').save(flush: true)
+        def user = new User(
+                name: 'Paul',
+                lastName: 'Peter',
+                email: 'paul.peter@gmail.com',
+                password: 'pass')
+                .save(flush: true)
+        user = new User(
+                name: 'Peter',
+                lastName: 'Pan',
+                email: 'peter.pan@gmail.com',
+                password: 'pass')
+                .save(flush: true)
+        user = new User(
+                name: 'John',
+                lastName: 'Doe',
+                email: 'john.doe@gmail.com',
+                password: 'pass')
+                .save(flush: true)
     }
 
     def createTasks() {
