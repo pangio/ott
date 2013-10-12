@@ -12,12 +12,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import javax.servlet.http.HttpServletResponse
 
-/**
- * Created with IntelliJ IDEA.
- * User: pangio
- * @author Pablo Angiorama
- * @dateCreated january, 2013
- */
 class LoginController {
 
     /**

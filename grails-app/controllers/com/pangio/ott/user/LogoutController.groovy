@@ -2,12 +2,6 @@ package com.pangio.ott.user
 
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
-/**
- * Created with IntelliJ IDEA.
- * User: pangio
- * @author Pablo Angiorama
- * @dateCreated january, 2013
- */
 class LogoutController {
 
     /**
