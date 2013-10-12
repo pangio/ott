@@ -2,4 +2,11 @@ modules = {
     application {
         resource url:'js/application.js'
     }
+
+    bootstrap {
+        dependsOn('jquery')
+        resource url: 'bootstrap/css/bootstrap-responsive.css'
+        resource url: 'bootstrap/css/bootstrap.css'
+        resource url: 'bootstrap/js/bootstrap.js'
+    }
 }
