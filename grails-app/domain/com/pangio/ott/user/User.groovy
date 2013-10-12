@@ -1,7 +1,5 @@
 package com.pangio.ott.user
 
-import com.pangio.ott.project.Project
-
 class User {
 
     String name
@@ -10,5 +8,10 @@ class User {
 
     static constraints = {
 
+    }
+
+    @Override
+    String toString() {
+        return name + ' '+ lastName
     }
 }

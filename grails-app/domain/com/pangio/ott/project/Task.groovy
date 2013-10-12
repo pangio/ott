@@ -7,4 +7,9 @@ class Task {
 
     static constraints = {
     }
+
+    @Override
+    String toString() {
+        return name
+    }
 }
