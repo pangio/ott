@@ -10,6 +10,7 @@ class User  {
 
     transient springSecurityService
 
+    String username
     String password
     String name
     String lastName

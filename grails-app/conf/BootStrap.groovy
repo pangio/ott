@@ -16,17 +16,17 @@ class BootStrap {
     }
 
     private void generateAdmin(){
-
         def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
-        def adminOtt= new User(
-                name: "admin",
+        def adminOTT= new User(
+                firstname: "admin",
                 lastname: "admin",
+                username: "admin",
                 email: "admin@ott.com",
                 password: "pass",
                 enabled: true
         ).save(flush: true)
 
-        UserRole.create(adminOtt, adminRole, true)
+        UserRole.create(adminOTT, adminRole, true)
 
     }
 
@@ -34,20 +34,26 @@ class BootStrap {
         def user = new User(
                 name: 'Paul',
                 lastName: 'Peter',
+                username: 'paul',
                 email: 'paul.peter@gmail.com',
-                password: 'pass')
+                password: 'pass',
+                enabled: true)
                 .save(flush: true)
         user = new User(
                 name: 'Peter',
                 lastName: 'Pan',
+                username: 'peter',
                 email: 'peter.pan@gmail.com',
-                password: 'pass')
+                password: 'pass',
+                enabled: true)
                 .save(flush: true)
         user = new User(
                 name: 'John',
                 lastName: 'Doe',
+                username: 'john',
                 email: 'john.doe@gmail.com',
-                password: 'pass')
+                password: 'pass',
+                enabled: true)
                 .save(flush: true)
     }
 
