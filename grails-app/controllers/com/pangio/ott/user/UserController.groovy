@@ -4,12 +4,6 @@ import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 import com.pangio.ott.user.User
 
-/**
- * Created with IntelliJ IDEA.
- * User: pangio
- * @author Pablo Angiorama
- * @dateCreated january, 2013
- */
 @Secured(["ROLE_ADMIN", "ROLE_SUPER_ADMIN"])
 class UserController {
 
