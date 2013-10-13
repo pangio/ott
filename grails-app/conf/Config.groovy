@@ -92,20 +92,30 @@ log4j = {
 }
 
 // Spring security --------------------------------------------------------
-grails.plugins.springsecurity.password.algorithm='SHA-512'
 
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.pangio.ott.user.User'
-grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.pangio.ott.user.UserRole'
-grails.plugins.springsecurity.authority.className = 'com.pangio.ott.user.Role'
+//grails.plugins.springsecurity.password.algorithm='SHA-512'
+//grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/'
+//grails.plugins.springsecurity.auth.loginFormUrl = '/'
+//grails.plugin.springsecurity.securityConfigType = "Annotation"
+//grails.plugins.springsecurity.useSecurityEventListener = true
+//
+//grails.plugins.springsecurity.rememberMe.cookieName='ott_remember_me'
+//grails.plugins.springsecurity.rememberMe.parameter='_spring_security_remember_me'
+//grails.plugins.springsecurity.rememberMe.key='ott'
+//grails.plugins.springsecurity.rememberMe.useSecureCookie=false
+//grails.plugins.springsecurity.rememberMe.persistent=false
 
-grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/'
-grails.plugins.springsecurity.auth.loginFormUrl = '/'
-grails.plugins.springsecurity.securityConfigType = "Annotation"
-grails.plugins.springsecurity.useSecurityEventListener = true
-
-grails.plugins.springsecurity.rememberMe.cookieName='ott_remember_me'
-grails.plugins.springsecurity.rememberMe.parameter='_spring_security_remember_me'
-grails.plugins.springsecurity.rememberMe.key='ott'
-grails.plugins.springsecurity.rememberMe.useSecureCookie=false
-grails.plugins.springsecurity.rememberMe.persistent=false
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.pangio.ott.user.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.pangio.ott.user.UserRole'
+grails.plugin.springsecurity.authority.className = 'com.pangio.ott.user.Role'
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                              ['permitAll'],
+	'/index':                         ['permitAll'],
+	'/index.gsp':                     ['permitAll'],
+	'/**/js/**':                      ['permitAll'],
+	'/**/css/**':                     ['permitAll'],
+	'/**/images/**':                  ['permitAll'],
+	'/**/favicon.ico':                ['permitAll']
+]
 

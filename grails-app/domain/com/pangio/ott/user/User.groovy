@@ -1,28 +1,24 @@
 package com.pangio.ott.user
 
-/**
- * Created with IntelliJ IDEA.
- * User: pangio
- * @author Pablo Angiorama
- * @dateCreated january, 2013
- */
-class User  {
+class User {
 
     transient springSecurityService
 
     String username
     String password
+    boolean enabled = true
     String name
     String lastName
     String email
-    boolean enabled
     boolean accountExpired
     boolean accountLocked
     boolean passwordExpired
 
-    /**     Relations and Constraints       */
+    static transients = ['springSecurityService']
 
     static constraints = {
+        username blank: false, unique: true
+        email blank: false, unique: true
         password blank: false
     }
 
@@ -53,5 +49,5 @@ class User  {
     String toString() {
         return name + ' ' + lastName
     }
-    
+
 }

@@ -49,10 +49,9 @@ grails.project.dependency.resolution = {
 
         build ":tomcat:$grailsVersion"
         runtime ":database-migration:1.1"
-//        compile ':cache:1.0.0'
-//        compile ':spring-security-core:2.0-RC2'
-        compile ":spring-security-core:1.2.7.1"
-//        compile ":mail:1.0"
+        compile ':cache:1.0.0'
+        compile ':spring-security-core:2.0-RC2'
+        compile ":mail:1.0"
         compile ":export:1.5"
 //        compile ":jquery-ui:1.8.24"
         compile ":jquery-date-time-picker:0.1.0"

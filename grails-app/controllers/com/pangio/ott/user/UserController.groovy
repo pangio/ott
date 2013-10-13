@@ -1,17 +1,16 @@
 package com.pangio.ott.user
 
-import grails.plugins.springsecurity.Secured
+//import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
-import com.pangio.ott.user.User
 
-@Secured(["ROLE_ADMIN", "ROLE_SUPER_ADMIN"])
+//@Secured(["ROLE_ADMIN", "ROLE_SUPER_ADMIN"])
 class UserController {
 
     def springSecurityService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    @Secured(["ROLE_USER","ROLE_ADMIN", "ROLE_SUPER_ADMIN"])
+//    @Secured(["ROLE_USER","ROLE_ADMIN", "ROLE_SUPER_ADMIN"])
     def index() {
         redirect(action: "list", params: params)
     }
@@ -22,7 +21,7 @@ class UserController {
         [userInstanceList: User.list(params), userInstanceTotal: User.count()]
     }*/
 
-    @Secured(["IS_AUTHENTICATED_ANONYMOUSLY"])
+//    @Secured(["IS_AUTHENTICATED_ANONYMOUSLY"])
     def register() {
         [userInstance: new User(params)]
     }
@@ -39,7 +38,7 @@ class UserController {
         redirect(action: "profile", id: userInstance.id)
     }
 
-    @Secured("IS_AUTHENTICATED_ANONYMOUSLY")
+//    @Secured("IS_AUTHENTICATED_ANONYMOUSLY")
     def profile() {
         def springUser = springSecurityService.getPrincipal()
         def userInstance = User.get(springUser.id)
@@ -53,7 +52,7 @@ class UserController {
         [userInstance: userInstance]
     }
 
-    @Secured(["IS_AUTHENTICATED_ANONYMOUSLY"])
+//    @Secured(["IS_AUTHENTICATED_ANONYMOUSLY"])
     def edit() {
         def userInstance = User.get(params.id)
         if (!userInstance) {
@@ -65,7 +64,7 @@ class UserController {
         [userInstance: userInstance]
     }
 
-    @Secured(["IS_AUTHENTICATED_ANONYMOUSLY"])
+//    @Secured(["IS_AUTHENTICATED_ANONYMOUSLY"])
     def update() {
         def userInstance = User.get(params.id)
         if (!userInstance) {
@@ -96,7 +95,7 @@ class UserController {
         redirect(action: "list")
     }
 
-    @Secured(["ROLE_ADMIN"])
+//    @Secured(["ROLE_ADMIN"])
     def delete() {
         def userInstance = User.get(params.id)
         if (!userInstance) {
@@ -117,7 +116,7 @@ class UserController {
     }
 
     def recovery = {
-        render(view: '/login/recovery')
+        render(view: '/removeLogin/recovery')
     }
 
 //    @Secured(['IS_AUTHENTICATED_FULLY'])
