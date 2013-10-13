@@ -46,7 +46,9 @@
                                 %{--<li><g:link controller="project" action="list">Projects...</g:link></li>--}%
                             %{--</ul>--}%
                         %{--</li>--}%
+                        <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
                         <li><g:link controller="project" action="list">Projects...</g:link></li>
+                        <li><g:link controller="report" action="list">Reports...</g:link></li>
                     </ul>
                 </div>
                 <div class="pull-right">
