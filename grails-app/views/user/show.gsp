@@ -1,5 +1,5 @@
 
-<%@ page import="com.pangio.ott.user.User" %>
+<%@ page import="com.pangio.ott.user.User2" %>
 <!DOCTYPE html>
 <html>
 	<head>
