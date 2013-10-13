@@ -87,5 +87,25 @@ log4j = {
            'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
            'org.springframework',
            'org.hibernate',
-           'net.sf.ehcache.hibernate'
+           'net.sf.ehcache.hibernate',
+           'com.pangio.ott'
 }
+
+// Spring security --------------------------------------------------------
+grails.plugins.springsecurity.password.algorithm='SHA-512'
+
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.pangio.ott.user.User'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.pangio.ott.user.UserRole'
+grails.plugins.springsecurity.authority.className = 'com.pangio.ott.user.Role'
+
+grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/'
+grails.plugins.springsecurity.auth.loginFormUrl = '/'
+grails.plugins.springsecurity.securityConfigType = "Annotation"
+grails.plugins.springsecurity.useSecurityEventListener = true
+
+grails.plugins.springsecurity.rememberMe.cookieName='ott_remember_me'
+grails.plugins.springsecurity.rememberMe.parameter='_spring_security_remember_me'
+grails.plugins.springsecurity.rememberMe.key='ott'
+grails.plugins.springsecurity.rememberMe.useSecureCookie=false
+grails.plugins.springsecurity.rememberMe.persistent=false
+
