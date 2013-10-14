@@ -14,47 +14,34 @@
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<ol class="property-list project">
-			
 				<g:if test="${projectInstance?.description}">
 				<li class="fieldcontain">
-					<span id="description-label" class="property-label"><g:message code="project.description.label" default="Description" /></span>
-					
+					<span id="description-label" class="property-label"><g:message code="default.description.label" default="Description" /></span>
 						<span class="property-value" aria-labelledby="description-label"><g:fieldValue bean="${projectInstance}" field="description"/></span>
-					
 				</li>
 				</g:if>
-			
 				<g:if test="${projectInstance?.members}">
 				<li class="fieldcontain">
-					<span id="members-label" class="property-label"><g:message code="project.members.label" default="Members" /></span>
-					
+					<span id="members-label" class="property-label"><g:message code="default.members.label" default="Members" /></span>
 						<g:each in="${projectInstance.members}" var="m">
-						<span class="property-value" aria-labelledby="members-label"><g:link controller="user" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="members-label"><g:link controller="user" action="profile" id="${m.id}">${m?.encodeAsHTML()}</g:link></span>
 						</g:each>
-					
 				</li>
 				</g:if>
-			
 				<g:if test="${projectInstance?.name}">
 				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="project.name.label" default="Name" /></span>
-					
+					<span id="name-label" class="property-label"><g:message code="default.name.label" default="Name" /></span>
 						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${projectInstance}" field="name"/></span>
-					
 				</li>
 				</g:if>
-			
 				<g:if test="${projectInstance?.tasks}">
 				<li class="fieldcontain">
-					<span id="tasks-label" class="property-label"><g:message code="project.tasks.label" default="Tasks" /></span>
-					
+					<span id="tasks-label" class="property-label"><g:message code="default.tasks.label" default="Tasks" /></span>
 						<g:each in="${projectInstance.tasks}" var="t">
 						<span class="property-value" aria-labelledby="tasks-label"><g:link controller="task" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
 						</g:each>
-					
 				</li>
 				</g:if>
-			
 			</ol>
 			<g:form>
 				<fieldset class="buttons">

@@ -3,19 +3,19 @@ package com.pangio.ott.user
 import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.dao.DataIntegrityViolationException
 
-@Secured(["ROLE_ADMIN", "ROLE_SUPER_ADMIN"])
+@Secured(["ROLE_ADMIN", "ROLE_SUPERUSER, ROLE_USER"])
 class UserController {
 
     def springSecurityService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    @Secured(["ROLE_USER","ROLE_ADMIN", "ROLE_SUPER_ADMIN"])
+    @Secured(["ROLE_ADMIN", "ROLE_SUPERUSER"])
     def index() {
         redirect(action: "list", params: params)
     }
 
-    @Secured(["ROLE_ADMIN", "ROLE_SUPER_ADMIN"])
+    @Secured(["ROLE_ADMIN", "ROLE_SUPERUSER"])
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [userInstanceList: User.list(params), userInstanceTotal: User.count()]
@@ -33,9 +33,7 @@ class UserController {
             render(view: "register", model: [userInstance: userInstance])
             return
         }
-
         flash.message = message(code: 'default.created.message', args: [message(code: 'default.user.label', default: 'User'), userInstance.id])
-
         redirect(action: "welcome", id: userInstance.id)
     }
 
@@ -47,11 +45,10 @@ class UserController {
             redirect(action: "list")
             return
         }
-
         [userInstance: userInstance]
     }
 
-    @Secured("IS_AUTHENTICATED_ANONYMOUSLY")
+    @Secured("IS_AUTHENTICATED_FULLY")
     def profile() {
         def springUser = springSecurityService.getPrincipal()
         def userInstance = User.get(springUser.id)
@@ -61,11 +58,10 @@ class UserController {
             redirect(action: "list")
             return
         }
-
         [userInstance: userInstance]
     }
 
-    @Secured(["IS_AUTHENTICATED_ANONYMOUSLY"])
+    @Secured(["ROLE_USER"])
     def edit() {
         def userInstance = User.get(params.id)
         if (!userInstance) {
@@ -73,28 +69,16 @@ class UserController {
             redirect(action: "list")
             return
         }
-
         [userInstance: userInstance]
     }
 
-    @Secured(["IS_AUTHENTICATED_ANONYMOUSLY"])
+    @Secured(["ROLE_USER"])
     def update() {
         def userInstance = User.get(params.id)
         if (!userInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.user.label', default: 'User'), params.id])
-            redirect(action: "list")
+            redirect ("/")
             return
-        }
-
-        if (params.version) {
-            def version = params.version.toLong()
-            if (userInstance.version > version) {
-                userInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [message(code: 'default.user.label', default: 'User')] as Object[],
-                        "Another user has updated this User while you were editing")
-                render(view: "edit", model: [userInstance: userInstance])
-                return
-            }
         }
 
         userInstance.properties = params
@@ -103,9 +87,8 @@ class UserController {
             render(view: "edit", model: [userInstance: userInstance])
             return
         }
-
         flash.message = message(code: 'default.updated.message', args: [message(code: 'default.user.label', default: 'User'), userInstance.id])
-        redirect(action: "list")
+        redirect(action: "profile")
     }
 
     @Secured(["ROLE_ADMIN"])
@@ -116,7 +99,6 @@ class UserController {
             redirect(action: "list")
             return
         }
-
         try {
             userInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'default.user.label', default: 'User'), params.id])
@@ -128,7 +110,8 @@ class UserController {
         }
     }
 
-    def recovery = {
+    @Secured("IS_AUTHENTICATED_ANONYMOUSLY")
+    def recovery() {
         render(template: '/login/recovery')
     }
 

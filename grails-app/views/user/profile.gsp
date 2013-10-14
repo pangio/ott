@@ -4,29 +4,18 @@
 <html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'user.profile.label', default: 'Profile')}" />
-    <title><g:message code="default.show.label" args="[entityName]" /></title>
+    <g:set var="entityName" value="${message(code: 'user.profile.label', default: 'Profile')}"/>
+    <title><g:message code="default.show.label" args="[entityName]"/></title>
 </head>
+
 <body>
 <div id="show-user" class="content scaffold-show" role="main">
     <h1><g:message code="user.profile.label"/></h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
-
     <div class="form-horizontal row">
-
         <div class="span6">
-
-            <g:if test="${userInstance?.username}">
-                <div class="control-group">
-                    <label class="control-label" for="username"><g:message code="default.username.label"/></label>
-                    <div class="controls">
-                        <input type="text" id="username" name="username" value="${userInstance?.username}" disabled>
-                    </div>
-                </div>
-            </g:if>
-
             <g:if test="${userInstance?.name}">
                 <div class="control-group">
                     <label class="control-label" for="name"><g:message code="default.name.label"/></label>
@@ -35,7 +24,6 @@
                     </div>
                 </div>
             </g:if>
-
             <g:if test="${userInstance?.lastName}">
                 <div class="control-group">
                     <label class="control-label" for="lastname"><g:message code="default.last.name.label"/></label>
@@ -44,7 +32,6 @@
                     </div>
                 </div>
             </g:if>
-
             <g:if test="${userInstance?.email}">
                 <div class="control-group">
                     <label class="control-label" for="email"><g:message code="default.email.label"/></label>
@@ -53,13 +40,21 @@
                     </div>
                 </div>
             </g:if>
-
+            <g:if test="${userInstance?.username}">
+                <div class="control-group">
+                    <label class="control-label" for="username"><g:message code="default.username.label"/></label>
+                    <div class="controls">
+                        <input type="text" id="username" name="username" value="${userInstance?.username}" disabled>
+                    </div>
+                </div>
+            </g:if>
             <g:form>
-            <fieldset>
-                <g:hiddenField name="id" value="${userInstance?.id}" />
-                <g:link class="btn btn-info" action="edit" id="${userInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-            </fieldset>
-        </g:form>
-    </div>
+                <fieldset>
+                    <g:hiddenField name="id" value="${userInstance?.id}"/>
+                    <g:link class="btn btn-info" action="edit" id="${userInstance?.id}"><g:message
+                            code="default.button.edit.label" default="Edit"/></g:link>
+                </fieldset>
+            </g:form>
+        </div>
 </body>
 </html>
