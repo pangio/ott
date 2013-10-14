@@ -80,9 +80,7 @@ class UserController {
             redirect ("/")
             return
         }
-
         userInstance.properties = params
-
         if (!userInstance.save(flush: true)) {
             render(view: "edit", model: [userInstance: userInstance])
             return

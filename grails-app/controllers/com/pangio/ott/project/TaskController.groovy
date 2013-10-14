@@ -1,7 +1,9 @@
 package com.pangio.ott.project
 
+import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.dao.DataIntegrityViolationException
 
+@Secured(["ROLE_ADMIN", "ROLE_SUPERUSER", "ROLE_USER"])
 class TaskController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -15,87 +17,75 @@ class TaskController {
         [taskInstanceList: Task.list(params), taskInstanceTotal: Task.count()]
     }
 
+    @Secured(["ROLE_ADMIN"])
     def create() {
         [taskInstance: new Task(params)]
     }
 
+    @Secured(["ROLE_ADMIN"])
     def save() {
         def taskInstance = new Task(params)
         if (!taskInstance.save(flush: true)) {
             render(view: "create", model: [taskInstance: taskInstance])
             return
         }
-
-        flash.message = message(code: 'default.created.message', args: [message(code: 'task.label', default: 'Task'), taskInstance.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'default.task.label', default: 'Task'), taskInstance.id])
         redirect(action: "show", id: taskInstance.id)
     }
 
     def show(Long id) {
         def taskInstance = Task.get(id)
         if (!taskInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'task.label', default: 'Task'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.task.label', default: 'Task'), id])
             redirect(action: "list")
             return
         }
-
         [taskInstance: taskInstance]
     }
 
+    @Secured(["ROLE_ADMIN"])
     def edit(Long id) {
         def taskInstance = Task.get(id)
         if (!taskInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'task.label', default: 'Task'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.task.label', default: 'Task'), id])
             redirect(action: "list")
             return
         }
-
         [taskInstance: taskInstance]
     }
 
-    def update(Long id, Long version) {
+    @Secured(["ROLE_ADMIN"])
+    def update(Long id) {
         def taskInstance = Task.get(id)
         if (!taskInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'task.label', default: 'Task'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.task.label', default: 'Task'), id])
             redirect(action: "list")
             return
         }
-
-        if (version != null) {
-            if (taskInstance.version > version) {
-                taskInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'task.label', default: 'Task')] as Object[],
-                          "Another user has updated this Task while you were editing")
-                render(view: "edit", model: [taskInstance: taskInstance])
-                return
-            }
-        }
-
         taskInstance.properties = params
-
         if (!taskInstance.save(flush: true)) {
             render(view: "edit", model: [taskInstance: taskInstance])
             return
         }
-
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'task.label', default: 'Task'), taskInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'default.tasks.label', default: 'Task'), taskInstance.id])
         redirect(action: "show", id: taskInstance.id)
     }
 
+    @Secured(["ROLE_ADMIN"])
     def delete(Long id) {
         def taskInstance = Task.get(id)
         if (!taskInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'task.label', default: 'Task'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.task.label', default: 'Task'), id])
             redirect(action: "list")
             return
         }
-
         try {
             taskInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'task.label', default: 'Task'), id])
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'default.task.label', default: 'Task'), id])
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'task.label', default: 'Task'), id])
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'default.task.label', default: 'Task'), id])
             redirect(action: "show", id: id)
         }
     }
