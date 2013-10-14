@@ -1,32 +1,32 @@
 package com.pangio.ott.user
 
-//import grails.plugins.springsecurity.Secured
+import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.dao.DataIntegrityViolationException
 
-//@Secured(["ROLE_ADMIN", "ROLE_SUPER_ADMIN"])
+@Secured(["ROLE_ADMIN", "ROLE_SUPER_ADMIN"])
 class UserController {
 
     def springSecurityService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-//    @Secured(["ROLE_USER","ROLE_ADMIN", "ROLE_SUPER_ADMIN"])
+    @Secured(["ROLE_USER","ROLE_ADMIN", "ROLE_SUPER_ADMIN"])
     def index() {
         redirect(action: "list", params: params)
     }
 
-/*    @Secured(["ROLE_ADMIN", "ROLE_SUPER_ADMIN"])
+    @Secured(["ROLE_ADMIN", "ROLE_SUPER_ADMIN"])
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [userInstanceList: User.list(params), userInstanceTotal: User.count()]
-    }*/
+    }
 
-//    @Secured(["IS_AUTHENTICATED_ANONYMOUSLY"])
+    @Secured(["IS_AUTHENTICATED_ANONYMOUSLY"])
     def register() {
         [userInstance: new User(params)]
     }
 
-//    @Secured(["IS_AUTHENTICATED_ANONYMOUSLY"])
+    @Secured(["IS_AUTHENTICATED_ANONYMOUSLY"])
     def save() {
         def userInstance = new User(params)
         if (!userInstance.save(flush: true)) {
@@ -38,7 +38,7 @@ class UserController {
         redirect(action: "profile", id: userInstance.id)
     }
 
-//    @Secured("IS_AUTHENTICATED_ANONYMOUSLY")
+    @Secured("IS_AUTHENTICATED_ANONYMOUSLY")
     def profile() {
         def springUser = springSecurityService.getPrincipal()
         def userInstance = User.get(springUser.id)
@@ -52,7 +52,7 @@ class UserController {
         [userInstance: userInstance]
     }
 
-//    @Secured(["IS_AUTHENTICATED_ANONYMOUSLY"])
+    @Secured(["IS_AUTHENTICATED_ANONYMOUSLY"])
     def edit() {
         def userInstance = User.get(params.id)
         if (!userInstance) {
@@ -64,7 +64,7 @@ class UserController {
         [userInstance: userInstance]
     }
 
-//    @Secured(["IS_AUTHENTICATED_ANONYMOUSLY"])
+    @Secured(["IS_AUTHENTICATED_ANONYMOUSLY"])
     def update() {
         def userInstance = User.get(params.id)
         if (!userInstance) {
@@ -95,7 +95,7 @@ class UserController {
         redirect(action: "list")
     }
 
-//    @Secured(["ROLE_ADMIN"])
+    @Secured(["ROLE_ADMIN"])
     def delete() {
         def userInstance = User.get(params.id)
         if (!userInstance) {
@@ -116,11 +116,11 @@ class UserController {
     }
 
     def recovery = {
-        render(view: '/removeLogin/recovery')
+        render(template: '/login/recovery')
     }
 
-//    @Secured(['IS_AUTHENTICATED_FULLY'])
-    def changepasswd = {
+    @Secured(["IS_AUTHENTICATED_FULLY"])
+    def changepasswd() {
         def userInstance = User.get(params.id)
         render(template: 'changepasswd', model: [user: userInstance])
     }

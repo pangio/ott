@@ -118,4 +118,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/images/**':                  ['permitAll'],
 	'/**/favicon.ico':                ['permitAll']
 ]
-
+grails.plugin.springsecurity.securityConfigType = "Annotation"
+grails.plugin.springsecurity.password.algorithm='bcrypt'
+grails.plugin.springsecurity.auth.loginFormUrl = '/login/auth'
+grails.plugin.springsecurity.securityConfigType = "Annotation"
+grails.plugin.springsecurity.useSecurityEventListener = true

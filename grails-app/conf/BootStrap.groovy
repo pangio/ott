@@ -6,29 +6,58 @@ import com.pangio.ott.user.UserRole
 
 class BootStrap {
 
+    def userRole
+    def adminRole
+    def superAdminRole
+
     def init = { servletContext ->
 
-        generateAdmin()
+        createRoles()
+        createSuperUser()
+        createAdmin()
         createUsers()
         createTasks()
         createProjects()
 
     }
 
-    private void generateAdmin(){
-        def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
+    private void createAdmin(){
         def adminOTT= new User(
-                firstname: "admin",
-                lastname: "admin",
+                name: "admin",
+                lastName: "admin",
                 username: "admin",
                 email: "admin@ott.com",
                 password: "pass",
                 enabled: true
         ).save(flush: true)
 
+        UserRole.create(adminOTT, userRole, true)
         UserRole.create(adminOTT, adminRole, true)
 
     }
+
+    private void createSuperUser(){
+        def superUserOTT= new User(
+                name: "super",
+                lastName: "user",
+                username: "super",
+                email: "super@ott.com",
+                password: "pass",
+                enabled: true
+        ).save(flush: true)
+
+        UserRole.create(superUserOTT, userRole, true)
+        UserRole.create(superUserOTT, adminRole, true)
+        UserRole.create(superUserOTT, superAdminRole, true)
+
+    }
+
+    def createRoles() {
+        userRole = new Role(authority: 'ROLE_USER').save(flush: true)
+        adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
+        superAdminRole = new Role(authority: 'ROLE_SUPERUSER').save(flush: true)
+    }
+
 
     def createUsers() {
         def user = new User(
@@ -39,6 +68,8 @@ class BootStrap {
                 password: 'pass',
                 enabled: true)
                 .save(flush: true)
+                UserRole.create user, userRole, true
+
         user = new User(
                 name: 'Peter',
                 lastName: 'Pan',
@@ -47,6 +78,8 @@ class BootStrap {
                 password: 'pass',
                 enabled: true)
                 .save(flush: true)
+                UserRole.create user, userRole, true
+
         user = new User(
                 name: 'John',
                 lastName: 'Doe',
@@ -55,6 +88,7 @@ class BootStrap {
                 password: 'pass',
                 enabled: true)
                 .save(flush: true)
+                UserRole.create user, userRole, true
     }
 
     def createTasks() {
@@ -89,5 +123,8 @@ class BootStrap {
     }
 
     def destroy = {
+        adminRole = null
+        userRole = null
+        superAdminRole = null
     }
 }
