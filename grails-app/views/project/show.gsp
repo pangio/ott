@@ -1,4 +1,3 @@
-
 <%@ page import="com.pangio.ott.project.Project" %>
 <!DOCTYPE html>
 <html>

@@ -1,10 +1,9 @@
-
 <%@ page import="com.pangio.ott.user.User" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
+		<g:set var="entityName" value="${message(code: 'default.user.label', default: 'User')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -16,9 +15,9 @@
 			<table>
 				<thead>
 					<tr>
-						<g:sortableColumn property="email" title="${message(code: 'user.email.label', default: 'Email')}" />
-						<g:sortableColumn property="lastName" title="${message(code: 'user.lastName.label', default: 'Last Name')}" />
-						<g:sortableColumn property="name" title="${message(code: 'user.name.label', default: 'Name')}" />
+						<g:sortableColumn property="email" title="${message(code: 'default.email.label', default: 'Email')}" />
+						<g:sortableColumn property="lastName" title="${message(code: 'default.last.name.label', default: 'Last Name')}" />
+						<g:sortableColumn property="name" title="${message(code: 'default.name.label', default: 'Name')}" />
 					</tr>
 				</thead>
 				<tbody>

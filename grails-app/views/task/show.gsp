@@ -1,10 +1,9 @@
-
 <%@ page import="com.pangio.ott.project.Task" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'task.label', default: 'Task')}" />
+		<g:set var="entityName" value="${message(code: 'default.task.label', default: 'Task')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -14,16 +13,12 @@
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<ol class="property-list task">
-			
 				<g:if test="${taskInstance?.name}">
 				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="task.name.label" default="Name" /></span>
-					
+					<span id="name-label" class="property-label"><g:message code="default.name.label" default="Name" /></span>
 						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${taskInstance}" field="name"/></span>
-					
 				</li>
 				</g:if>
-			
 			</ol>
 			<g:form>
 				<fieldset class="buttons">

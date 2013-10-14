@@ -20,13 +20,10 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-
             <g:form controller="user" action="save" >
                 <g:render template="form"/>
-
                 <div class="row">
                     <div class="span6">
-
                         <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'password', 'error')} ">
                             <label for="password">
                                 <g:message code="default.password.label" default="password" />
@@ -35,10 +32,8 @@
                         </div>
                     </div>
                 </div>
-
                 <g:actionSubmit name="save" class="btn btn-primary" value="save" />
             </g:form>
-
         </div>
 	</body>
 </html>
