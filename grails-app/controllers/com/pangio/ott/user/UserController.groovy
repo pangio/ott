@@ -35,7 +35,20 @@ class UserController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'default.user.label', default: 'User'), userInstance.id])
-        redirect(action: "profile", id: userInstance.id)
+
+        redirect(action: "welcome", id: userInstance.id)
+    }
+
+    @Secured("IS_AUTHENTICATED_ANONYMOUSLY")
+    def welcome(Long id) {
+        def userInstance = User.get(id)
+        if (!userInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.user.label', default: 'User'), params.id])
+            redirect(action: "list")
+            return
+        }
+
+        [userInstance: userInstance]
     }
 
     @Secured("IS_AUTHENTICATED_ANONYMOUSLY")
