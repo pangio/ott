@@ -16,8 +16,8 @@ class BootStrap {
         createSuperUser()
         createAdmin()
         createUsers()
-        createTasks()
         createProjects()
+        createTasks()
 
     }
 
@@ -31,7 +31,7 @@ class BootStrap {
                 enabled: true
         ).save(flush: true)
 
-//        UserRole.create(adminOTT, userRole, true)
+        UserRole.create(adminOTT, userRole, true)
         UserRole.create(adminOTT, adminRole, true)
 
     }
@@ -46,8 +46,8 @@ class BootStrap {
                 enabled: true
         ).save(flush: true)
 
-//        UserRole.create(superUserOTT, userRole, true)
-//        UserRole.create(superUserOTT, adminRole, true)
+        UserRole.create(superUserOTT, userRole, true)
+        UserRole.create(superUserOTT, adminRole, true)
         UserRole.create(superUserOTT, superAdminRole, true)
 
     }
@@ -93,12 +93,12 @@ class BootStrap {
 
     def createTasks() {
         def task = new Task(name: 'Development').save(flush: true)
-        task = new Task(name: 'QA frontend').save(flush: true)
-        task = new Task(name: 'QA backend').save(flush: true)
-        task = new Task(name: 'Performance').save(flush: true)
-        task = new Task(name: 'Design').save(flush: true)
-        task = new Task(name: 'Marketing').save(flush: true)
-        task = new Task(name: 'Administration').save(flush: true)
+        task = new Task(name: 'QA frontend', project: Project.get(1)).save(flush: true)
+        task = new Task(name: 'QA backend', project: Project.get(1)).save(flush: true)
+        task = new Task(name: 'Performance', project: Project.get(2)).save(flush: true)
+        task = new Task(name: 'Design', project: Project.get(2)).save(flush: true)
+        task = new Task(name: 'Marketing', project: Project.get(3)).save(flush: true)
+        task = new Task(name: 'Administration', project: Project.get(3)).save(flush: true)
     }
 
     def createProjects() {

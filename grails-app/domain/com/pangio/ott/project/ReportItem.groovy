@@ -11,6 +11,7 @@ class ReportItem {
     String comments
 
     static constraints = {
+        hours min: 0L
     }
 
 }

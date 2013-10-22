@@ -15,6 +15,8 @@
 
     <g:javascript library="jquery" plugin="jquery" />
     <r:require module="bootstrap"/>
+    <r:require module="chosen"/>
+    <r:require module="timepicker"/>
     <r:require module="application"/>
 
     <r:script>
@@ -49,6 +51,8 @@
                         <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
                         <li><g:link controller="project" action="list">Projects...</g:link></li>
                         <li><g:link controller="report" action="list">Reports...</g:link></li>
+                        <li><g:link controller="reportItem" action="list">Horas...</g:link></li>
+                        <li><g:link controller="task" action="list">Tasks...</g:link></li>
                     </ul>
                 </div>
                 <div class="pull-right">
