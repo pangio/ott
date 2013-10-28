@@ -16,8 +16,8 @@ class BootStrap {
         createSuperUser()
         createAdmin()
         createUsers()
-        createTasks()
         createProjects()
+        createTasks()
 
     }
 
@@ -92,32 +92,32 @@ class BootStrap {
     }
 
     def createTasks() {
-        def task = new Task(name: 'Development').save(flush: true)
-        task = new Task(name: 'QA frontend').save(flush: true)
-        task = new Task(name: 'QA backend').save(flush: true)
-        task = new Task(name: 'Performance').save(flush: true)
-        task = new Task(name: 'Design').save(flush: true)
-        task = new Task(name: 'Marketing').save(flush: true)
-        task = new Task(name: 'Administration').save(flush: true)
+        def task = new Task(name: 'Development', project: Project.get(1)).save(flush: true)
+        task = new Task(name: 'QA frontend', project: Project.get(1)).save(flush: true)
+        task = new Task(name: 'Design', project: Project.get(2)).save(flush: true)
+        task = new Task(name: 'QA backend', project: Project.get(2)).save(flush: true)
+        task = new Task(name: 'Performance', project: Project.get(2)).save(flush: true)
+        task = new Task(name: 'Marketing', project: Project.get(3)).save(flush: true)
+        task = new Task(name: 'Administration', project: Project.get(3)).save(flush: true)
     }
 
     def createProjects() {
         def project = new Project(
                 name: 'Website on dev',
                 description: 'offshore team',
-                tasks: [Task.get(1),Task.get(5), Task.get(3)],
+//                tasks: [Task.get(1),Task.get(5), Task.get(3)],
                 members: [User.get(4), User.get(2), User.get(3)]
         ).save(flush: true)
         project = new Project(
                 name: 'Website in Testing',
                 description: 'onsite team',
-                tasks: [Task.get(2), Task.get(2), Task.get(4)],
+//                tasks: [Task.get(2), Task.get(2), Task.get(4)],
                 members: [User.get(4), User.get(5)]
         ).save(flush: true)
         project = new Project(
                 name: 'Admin Stuff',
                 description: 'accountant, financial, administration',
-                tasks: [Task.get(6), Task.get(7)],
+//                tasks: [Task.get(6), Task.get(7)],
                 members: [User.get(3)]
         ).save(flush: true)
     }

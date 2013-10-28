@@ -33,6 +33,86 @@
 </head>
 
 <body>
+
+<div class="container">
+    <div class="masthead">
+        <h3 class="muted">Project name</h3>
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <ul class="nav">
+                            <li><g:link uri="/" class="brand"><i class="icon-home icon-white"></i></g:link></li>
+                            %{--<li class="dropdown">--}%
+                            %{--<a class="dropdown-toggle" data-toggle="dropdown" href="#">lalalala<b class="caret"></b></a>--}%
+                            %{--<ul class="dropdown-menu">--}%
+                            %{--<li><g:link controller="project" action="list">Projects...</g:link></li>--}%
+                            %{--</ul>--}%
+                            %{--</li>--}%
+                            <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+                            <li><g:link controller="project" action="list">Projects...</g:link></li>
+                            <li><g:link controller="task" action="list">Tasks</g:link></li>
+                            <li><g:link controller="report" action="list">Reports</g:link></li>
+                            <li><a class="home" href="${createLink(uri: '/')}">Downloads</a></li>
+                            <li><a class="home" href="${createLink(uri: '/')}">About</a></li>
+                            <li><a class="home" href="${createLink(uri: '/')}">Contact</a></li>
+                        </ul>
+                        <div class="pull-right">
+                            <p class="navbar-text pull-right">Version <g:meta name="app.version"/></p>
+                            <sec:ifLoggedIn>
+                                <ul class="nav pull-right">
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <g:message code="welcome.user.label"/>
+                                <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <g:link controller="user" action="profile"><g:message code="default.profile.label"/></g:link>
+                                    <g:link controller="logout" action="index"><g:message code="default.logout.label"/></g:link>
+                                </ul>
+                                </li>
+                            </sec:ifLoggedIn>
+                            <sec:ifNotLoggedIn>
+                                <p class="navbar-text pull-right">
+                                    <g:link controller="login" action="index"> <g:message code="default.login.label"/> </g:link>
+                                    <g:link controller="user" action="register"> <g:message code="default.register.label"/> </g:link>
+                                </p>
+                            </sec:ifNotLoggedIn>
+                        </div>
+                        %{--<div class="pull-right">
+                            <p class="navbar-text pull-right">Version <g:meta name="app.version"/></p>
+                            <sec:ifLoggedIn>
+                                <ul class="nav pull-right">
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <g:message code="welcome.user.label"/>
+                                <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <g:link controller="user" action="profile"><g:message code="default.profile.label"/></g:link>
+                                    <g:link controller="logout" action="index"><g:message code="default.logout.label"/></g:link>
+                                </ul>
+                                </li>
+                            </sec:ifLoggedIn>
+                            <sec:ifNotLoggedIn>
+                                <p class="navbar-text pull-right">
+                                    <g:link controller="login" action="index"> <g:message code="default.login.label"/> </g:link>
+                                    <g:link controller="user" action="register"> <g:message code="default.register.label"/> </g:link>
+                                </p>
+                            </sec:ifNotLoggedIn>
+                        </div>
+                    </ul>
+                    </p>--}%
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+
+
+
+
+%{--
 <header>
     <div class="navbar">
         <div class="navbar-inner">
@@ -40,12 +120,12 @@
                 <div>
                     <ul class="nav">
                         <li><g:link uri="/" class="brand"><i class="icon-home icon-white"></i></g:link></li>
-                        %{--<li class="dropdown">--}%
-                            %{--<a class="dropdown-toggle" data-toggle="dropdown" href="#">lalalala<b class="caret"></b></a>--}%
-                            %{--<ul class="dropdown-menu">--}%
-                                %{--<li><g:link controller="project" action="list">Projects...</g:link></li>--}%
-                            %{--</ul>--}%
-                        %{--</li>--}%
+                        --}%%{--<li class="dropdown">--}%%{--
+                            --}%%{--<a class="dropdown-toggle" data-toggle="dropdown" href="#">lalalala<b class="caret"></b></a>--}%%{--
+                            --}%%{--<ul class="dropdown-menu">--}%%{--
+                                --}%%{--<li><g:link controller="project" action="list">Projects...</g:link></li>--}%%{--
+                            --}%%{--</ul>--}%%{--
+                        --}%%{--</li>--}%%{--
                         <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
                         <li><g:link controller="project" action="list">Projects...</g:link></li>
                         <li><g:link controller="report" action="list">Reports...</g:link></li>
@@ -79,7 +159,7 @@
             </div>
         </div>
     </div>
-</header>
+</header>--}%
 <section class="container">
     <g:if test="${flash.message}">
         <div class="alert alert-info">${flash.message}</div>

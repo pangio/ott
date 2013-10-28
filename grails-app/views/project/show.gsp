@@ -12,6 +12,7 @@
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
+
 			<ol class="property-list project">
 				<g:if test="${projectInstance?.description}">
 				<li class="fieldcontain">
@@ -19,14 +20,27 @@
 						<span class="property-value" aria-labelledby="description-label"><g:fieldValue bean="${projectInstance}" field="description"/></span>
 				</li>
 				</g:if>
+
 				<g:if test="${projectInstance?.members}">
-				<li class="fieldcontain">
-					<span id="members-label" class="property-label"><g:message code="default.members.label" default="Members" /></span>
-						<g:each in="${projectInstance.members}" var="m">
-						<span class="property-value" aria-labelledby="members-label"><g:link controller="user" action="profile" id="${m.id}">${m?.encodeAsHTML()}</g:link></span>
-						</g:each>
-				</li>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <g:sortableColumn property="name" title="${message(code: 'default.name.label', default: 'Name')}" />
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <g:each in="${projectInstance?.members}" status="i" var="member">
+                                <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+                                    <td><g:link action="show" id="${member.id}">${fieldValue(bean: member, field: "name")}</g:link></td>
+                                </tr>
+                            </g:each>
+                            </tbody>
+                        </table>
+                    </div>
 				</g:if>
+
+
 				<g:if test="${projectInstance?.name}">
 				<li class="fieldcontain">
 					<span id="name-label" class="property-label"><g:message code="default.name.label" default="Name" /></span>

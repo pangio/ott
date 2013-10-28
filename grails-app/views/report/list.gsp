@@ -13,20 +13,23 @@
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
-    <table>
-        <thead>
-        <tr>
 
-        </tr>
-        </thead>
-        <tbody>
-        <g:each in="${reportInstanceList}" status="i" var="reportInstance">
-            <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
 
             </tr>
-        </g:each>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            <g:each in="${reportInstanceList}" status="i" var="reportInstance">
+                <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+
+                </tr>
+            </g:each>
+            </tbody>
+        </table>
+    </div>
 
     <div class="pagination">
         <g:paginate total="${reportInstanceTotal}"/>

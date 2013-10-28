@@ -12,20 +12,23 @@
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<table>
-				<thead>
-					<tr>
-						<g:sortableColumn property="name" title="${message(code: 'default.name.label', default: 'Name')}" />
-					</tr>
-				</thead>
-				<tbody>
-				<g:each in="${taskInstanceList}" status="i" var="taskInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-						<td><g:link action="show" id="${taskInstance.id}">${fieldValue(bean: taskInstance, field: "name")}</g:link></td>
-					</tr>
-				</g:each>
-				</tbody>
-			</table>
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <g:sortableColumn property="name" title="${message(code: 'default.name.label', default: 'Name')}" />
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <g:each in="${taskInstanceList}" status="i" var="taskInstance">
+                        <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+                            <td><g:link action="show" id="${taskInstance.id}">${fieldValue(bean: taskInstance, field: "name")}</g:link></td>
+                        </tr>
+                    </g:each>
+                    </tbody>
+                </table>
+            </div>
 			<div class="pagination">
 				<g:paginate total="${taskInstanceTotal}" />
 			</div>
