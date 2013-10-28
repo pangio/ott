@@ -19,7 +19,7 @@ class ProjectController {
 
     @Secured(["ROLE_ADMIN"])
     def create() {
-        [projectInstance: new Project(params)]
+        [projectInstance: new Project(params), tasks : Task.list()]
     }
 
     @Secured(["ROLE_ADMIN"])

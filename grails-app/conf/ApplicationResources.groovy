@@ -9,4 +9,10 @@ modules = {
         resource url: 'bootstrap/css/bootstrap.css'
         resource url: 'bootstrap/js/bootstrap.js'
     }
+
+    chosen {
+        dependsOn('jquery')
+        resource url: 'chosen/css/chosen.css', disposition: 'head'
+        resource url: 'chosen/js/chosen.jquery.js', disposition: 'head'
+    }
 }
