@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException
 class ReportItemController {
 
     def springSecurityService
+    def projectService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -19,7 +20,12 @@ class ReportItemController {
     @Secured(["ROLE_USER"])
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [reportItemInstanceList: ReportItem.list(params), reportItemInstanceTotal: ReportItem.count()]
+
+        def springUser = springSecurityService.getPrincipal()
+        def userInstance = User.get(springUser.id)
+        def assignedProjects = projectService.getAssignedProjects(userInstance.id)
+
+        [reportItemInstanceList: ReportItem.list(params), reportItemInstanceTotal: ReportItem.count(), assignedProjects: assignedProjects]
     }
 
     @Secured(["ROLE_USER"])

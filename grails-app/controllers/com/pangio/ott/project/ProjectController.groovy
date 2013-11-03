@@ -45,7 +45,7 @@ class ProjectController {
 
     @Secured(["ROLE_ADMIN"])
     def edit(Long id) {
-        def projectInstance = Project.get(id)
+        def projectInstance = Project.get(params.id)
         if (!projectInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.project.label', default: 'Project'), id])
             redirect(action: "list")

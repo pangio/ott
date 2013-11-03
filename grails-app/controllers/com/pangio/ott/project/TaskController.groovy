@@ -33,19 +33,9 @@ class TaskController {
         redirect(action: "show", id: taskInstance.id)
     }
 
-    def show(Long id) {
-        def taskInstance = Task.get(id)
-        if (!taskInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.task.label', default: 'Task'), id])
-            redirect(action: "list")
-            return
-        }
-        [taskInstance: taskInstance]
-    }
-
     @Secured(["ROLE_ADMIN"])
     def edit(Long id) {
-        def taskInstance = Task.get(id)
+        def taskInstance = Task.get(params.id)
         if (!taskInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.task.label', default: 'Task'), id])
             redirect(action: "list")
@@ -67,8 +57,18 @@ class TaskController {
             render(view: "edit", model: [taskInstance: taskInstance])
             return
         }
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'default.tasks.label', default: 'Task'), taskInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'default.task.label', default: 'Task'), taskInstance.id])
         redirect(action: "show", id: taskInstance.id)
+    }
+
+    def show(Long id) {
+        def taskInstance = Task.get(id)
+        if (!taskInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.task.label', default: 'Task'), id])
+            redirect(action: "list")
+            return
+        }
+        [taskInstance: taskInstance]
     }
 
     @Secured(["ROLE_ADMIN"])

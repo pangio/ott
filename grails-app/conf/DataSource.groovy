@@ -1,7 +1,7 @@
 dataSource {
     pooled = true
     dbCreate = "create-drop"
-    url = "jdbc:mysql://localhost/ott"
+    url = "jdbc:mysql://localhost/timetracker"
     driverClassName = "com.mysql.jdbc.Driver"
     username = "root"
     password = ""

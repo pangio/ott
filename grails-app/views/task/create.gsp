@@ -24,7 +24,7 @@
 					<g:render template="form"/>
 				</fieldset>
 				<fieldset class="buttons">
-					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+					<g:submitButton name="create" class="btn btn-success" value="${message(code: 'button.done.label', default: 'Done')}" onclick="return confirm('${message(code: 'button.befor.task.done.confirmation.label', default: 'This taks can not been modified later')}');"/>
 				</fieldset>
 			</g:form>
 		</div>

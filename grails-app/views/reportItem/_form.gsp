@@ -1,8 +1,25 @@
 <%@ page import="com.pangio.ott.project.ReportItem" %>
 
-<r:require modules="chosen, timepicker"/>
+<r:require modules="chosen,timepicker"/>
 <r:script>
     $("#task").data("placeholder", "Select Tasks...").chosen();
+</r:script>
+
+<r:script>
+    var currentDate = new Date();
+    Date.prototype.addDays = function(days) {
+    this.setDate(this.getDate() - days);
+    return this;
+    };
+
+    $( "#releaseDate" ).datepicker({
+        defaultDate: new Date(),
+        changeMonth: false,
+        numberOfMonths: 1,
+        changeMonth:false,
+        changeYear:false,
+        minDate: currentDate.addDays(7)
+    });
 </r:script>
 
 <div class="fieldcontain ${hasErrors(bean: reportItemInstance, field: 'comments', 'error')} ">

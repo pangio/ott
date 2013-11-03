@@ -1,3 +1,4 @@
+<%@ page import="com.pangio.ott.project.Task" %>
 <%@ page import="com.pangio.ott.project.Project" %>
 <html>
 	<head>
@@ -16,23 +17,26 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <g:sortableColumn property="description" title="${message(code: 'default.description.label', default: 'Description')}" />
                             <g:sortableColumn property="name" title="${message(code: 'default.name.label', default: 'Name')}" />
+                            <g:sortableColumn property="description" title="${message(code: 'default.description.label', default: 'Description')}" />
                         </tr>
                     </thead>
                     <tbody>
+
                     <g:each in="${projectInstanceList}" status="i" var="projectInstance">
                         <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                            <td><g:link action="show" id="${projectInstance.id}">${fieldValue(bean: projectInstance, field: "description")}</g:link></td>
-                            <td>${fieldValue(bean: projectInstance, field: "name")}</td>
+                            <td><g:link action="show" id="${projectInstance.id}">${fieldValue(bean: projectInstance, field: "name")}</g:link></td>
+                            <td>${fieldValue(bean: projectInstance, field: "description")}</td>
                         </tr>
                     </g:each>
                     </tbody>
                 </table>
             </div>
-			<div class="pagination">
+
+            <div class="pagination">
 				<g:paginate total="${projectInstanceTotal}" />
 			</div>
+            <g:link class="btn btn-info" action="create"><g:message code="default.new.project.label"/></g:link>
 		</div>
 	</body>
 </html>
