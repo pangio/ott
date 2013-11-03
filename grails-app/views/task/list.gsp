@@ -32,6 +32,7 @@
 			<div class="pagination">
 				<g:paginate total="${taskInstanceTotal}" />
 			</div>
-		</div>
+            <g:link class="btn btn-info" action="create"><g:message code="default.new.task.label"/></g:link>
+        </div>
 	</body>
 </html>
