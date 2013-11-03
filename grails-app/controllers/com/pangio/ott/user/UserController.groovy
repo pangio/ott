@@ -61,6 +61,20 @@ class UserController {
         [userInstance: userInstance]
     }
 
+//    TODO move to OTT
+//    @Secured("IS_AUTHENTICATED_FULLY")
+//    def publicProfile() {
+//        def springUser = springSecurityService.getPrincipal()
+//        def userInstance = User.get(springUser.id)
+//
+//        if (!userInstance) {
+//            flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.user.label', default: 'User'), params.id])
+//            redirect(action: "list")
+//            return
+//        }
+//        [userInstance: User.get(params.id)]
+//    }
+
     @Secured(["ROLE_USER"])
     def edit() {
         def userInstance = User.get(params.id)

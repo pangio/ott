@@ -17,38 +17,16 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <g:sortableColumn property="description" title="${message(code: 'default.description.label', default: 'Description')}" />
                             <g:sortableColumn property="name" title="${message(code: 'default.name.label', default: 'Name')}" />
+                            <g:sortableColumn property="description" title="${message(code: 'default.description.label', default: 'Description')}" />
                         </tr>
                     </thead>
                     <tbody>
+
                     <g:each in="${projectInstanceList}" status="i" var="projectInstance">
                         <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                            <td><g:link action="show" id="${projectInstance.id}">${fieldValue(bean: projectInstance, field: "description")}</g:link></td>
-                            <td>${fieldValue(bean: projectInstance, field: "name")}</td>
-                        </tr>
-                    </g:each>
-                    </tbody>
-                </table>
-            </div>
-
-
-
-
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-
-                        <g:sortableColumn property="name" title="${message(code: 'default.name.label', default: 'Name')}" />
-
-                        <g:sortableColumn property="name" title="${message(code: 'default.name.label', default: 'Name')}" />
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <g:each in="${Task.list()}" status="i" var="projectInstance">
-                        <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                             <td><g:link action="show" id="${projectInstance.id}">${fieldValue(bean: projectInstance, field: "name")}</g:link></td>
+                            <td>${fieldValue(bean: projectInstance, field: "description")}</td>
                         </tr>
                     </g:each>
                     </tbody>

@@ -12,24 +12,34 @@
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<table>
-				<thead>
-					<tr>
-						<g:sortableColumn property="email" title="${message(code: 'default.email.label', default: 'Email')}" />
-						<g:sortableColumn property="lastName" title="${message(code: 'default.last.name.label', default: 'Last Name')}" />
-						<g:sortableColumn property="name" title="${message(code: 'default.name.label', default: 'Name')}" />
-					</tr>
-				</thead>
-				<tbody>
-				<g:each in="${userInstanceList}" status="i" var="userInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-						<td><g:link action="profile" id="${userInstance.id}">${fieldValue(bean: userInstance, field: "email")}</g:link></td>
-						<td>${fieldValue(bean: userInstance, field: "lastName")}</td>
-						<td>${fieldValue(bean: userInstance, field: "name")}</td>
-					</tr>
-				</g:each>
-				</tbody>
-			</table>
+
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <g:sortableColumn property="name" title="${message(code: 'default.name.label', default: 'Name')}" />
+                        <g:sortableColumn property="lastName" title="${message(code: 'default.name.label', default: 'Last Name')}" />
+                        <g:sortableColumn property="email" title="${message(code: 'default.name.label', default: 'Email')}" />
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <g:each in="${userInstanceList}" status="i" var="userInstance">
+                        <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+                            <td>${fieldValue(bean: userInstance, field: "name")}</td>
+                            <td>${fieldValue(bean: userInstance, field: "lastName")}</td>
+                            <td>${fieldValue(bean: userInstance, field: "email")}</td>
+                        </tr>
+                    </g:each>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pagination">
+                <g:paginate total="${userInstanceList.size()}" />
+            </div>
+
 			<div class="pagination">
 				<g:paginate total="${userInstanceTotal}" />
 			</div>

@@ -15,14 +15,14 @@ class ReportService {
     }
 
     def getProjectFullReport (Project project, Date firstDate, Date secondDate) {
-        Report userFullReport = new Report()
+        Report projectReport = new Report()
         List<ReportItem> items =  ReportItem.findAllByReleaseDateBetween(firstDate, secondDate)
         items.each {
-            if (it.task.project == project) {
-                userFullReport.addToItems(it)
+            if (it.task.project.id == project.id) {
+                projectReport.addToItems(it)
             }
         }
-        return userFullReport
+        return projectReport
 
     }
 
