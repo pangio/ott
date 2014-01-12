@@ -26,6 +26,7 @@
 				<fieldset class="buttons">
 					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
 				</fieldset>
+                <g:hiddenField name="projectId" value="${params.projectId}" />
 			</g:form>
 		</div>
 	</body>

@@ -9,6 +9,7 @@ class ReportItem {
     Long hours
     Date releaseDate
     String comments
+    Project project
 
     static constraints = {
         hours min: 0L

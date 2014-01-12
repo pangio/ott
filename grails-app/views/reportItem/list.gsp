@@ -16,10 +16,11 @@
     <table>
         <thead>
         <tr>
-            <g:sortableColumn property="comments" title="${message(code: 'reportItem.comments.label', default: 'Comments')}"/>
-            <g:sortableColumn property="hours" title="${message(code: 'reportItem.hours.label', default: 'Hours')}"/>
-            <g:sortableColumn property="releaseDate" title="${message(code: 'reportItem.releaseDate.label', default: 'Release Date')}"/>
-            <th><g:message code="reportItem.task.label" default="Task"/></th>
+            <g:sortableColumn property="comments" title="${message(code: 'default.comments.label', default: 'Comments')}"/>
+            <g:sortableColumn property="hours" title="${message(code: 'default.hours.label', default: 'Hours')}"/>
+            <g:sortableColumn property="releaseDate" title="${message(code: 'default.release.date.label', default: 'Release Date')}"/>
+            <th><g:message code="default.task.label" default="Task"/></th>
+            <th><g:message code="default.project.label" default="Project"/></th>
         </tr>
         </thead>
         <tbody>
@@ -29,6 +30,7 @@
                 <td>${fieldValue(bean: reportItemInstance, field: "hours")}</td>
                 <td><g:formatDate date="${reportItemInstance.releaseDate}"/></td>
                 <td>${fieldValue(bean: reportItemInstance, field: "task")}</td>
+                <td>${fieldValue(bean: reportItemInstance, field: "project")}</td>
             </tr>
         </g:each>
         </tbody>
@@ -39,8 +41,11 @@
                 <div class="accordion-heading">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-${projectInstance.id}"
                        href="#collapse-${projectInstance.id}">
-                        <div class="message" role="status">${projectInstance.name}</div>
+                        <div class="message span10" role="status">${projectInstance.name}</div>
                     </a>
+                        <g:link class="btn btn-info" action="create" params="[projectId: projectInstance.id]">
+                            <g:message code="default.button.hours.submit.label"/>
+                        </g:link>
                 </div>
 
                 <div id="collapse-${projectInstance.id}" class="accordion-body collapse in">

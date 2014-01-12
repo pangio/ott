@@ -39,6 +39,7 @@ class ReportItemController {
         def springUser = springSecurityService.getPrincipal()
         def userInstance = User.get(springUser.id)
         reportItemInstance.user = userInstance
+        reportItemInstance.project = Project.get(params.projectId)
 
         if (!reportItemInstance.save(flush: true)) {
             render(view: "create", model: [reportItemInstance: reportItemInstance])

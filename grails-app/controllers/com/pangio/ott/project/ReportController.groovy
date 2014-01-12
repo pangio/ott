@@ -1,24 +1,29 @@
 package com.pangio.ott.project
 
+import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.dao.DataIntegrityViolationException
 
 class ReportController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+    @Secured(["ROLE_USER"])
     def index() {
         redirect(action: "list", params: params)
     }
 
+    @Secured(["ROLE_USER"])
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         [reportInstanceList: Report.list(params), reportInstanceTotal: Report.count()]
     }
 
+    @Secured(["ROLE_USER"])
     def create() {
         [reportInstance: new Report(params)]
     }
 
+    @Secured(["ROLE_USER"])
     def save() {
         def reportInstance = new Report(params)
         if (!reportInstance.save(flush: true)) {
@@ -30,6 +35,7 @@ class ReportController {
         redirect(action: "show", id: reportInstance.id)
     }
 
+    @Secured(["ROLE_USER"])
     def show(Long id) {
         def reportInstance = Report.get(id)
         if (!reportInstance) {
@@ -41,6 +47,7 @@ class ReportController {
         [reportInstance: reportInstance]
     }
 
+    @Secured(["ROLE_USER"])
     def edit(Long id) {
         def reportInstance = Report.get(id)
         if (!reportInstance) {
@@ -52,6 +59,7 @@ class ReportController {
         [reportInstance: reportInstance]
     }
 
+    @Secured(["ROLE_USER"])
     def update(Long id, Long version) {
         def reportInstance = Report.get(id)
         if (!reportInstance) {
@@ -81,6 +89,7 @@ class ReportController {
         redirect(action: "show", id: reportInstance.id)
     }
 
+    @Secured(["ROLE_USER"])
     def delete(Long id) {
         def reportInstance = Report.get(id)
         if (!reportInstance) {
