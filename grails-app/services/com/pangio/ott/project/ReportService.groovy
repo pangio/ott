@@ -1,29 +1,22 @@
 package com.pangio.ott.project
 
 import com.pangio.ott.user.User
-import com.pangio.ott.project.Project
 
 class ReportService {
 
-    def Report getUserFullReport (User user, Date firstDate, Date secondDate) {
-        Report userFullReport = new Report()
-        List<ReportItem> items =  ReportItem.findAllByUserAndReleaseDateBetween(user, firstDate, secondDate)
-        items.each {
-            userFullReport.addToItems(it)
-        }
-        return userFullReport
+    def List<ReportItem> buildUserReport (User user, Date dateFrom, Date dateTo) {
+        List<ReportItem> userReport =  ReportItem.findAllByUserAndReleaseDateBetween(user, dateFrom, dateTo)
+        return userReport
     }
 
-    def getProjectFullReport (Project project, Date firstDate, Date secondDate) {
-        Report projectReport = new Report()
-        List<ReportItem> items =  ReportItem.findAllByReleaseDateBetween(firstDate, secondDate)
-        items.each {
-            if (it.task.project.id == project.id) {
-                projectReport.addToItems(it)
-            }
-        }
+    def List<ReportItem> buildProjectReport (Project project, Date dateFrom, Date dateTo) {
+        List<ReportItem> projectReport =  ReportItem.findAllByProjectAndReleaseDateBetween(project, dateFrom, dateTo)
         return projectReport
+    }
 
+    def List<ReportItem> buildUserAndProjectReport (User user, Project project, Date dateFrom, Date dateTo) {
+        List<ReportItem> projectAndUserReport =  ReportItem.findAllByUserAndProjectAndReleaseDateBetween(user, project, dateFrom, dateTo)
+        return projectAndUserReport
     }
 
     def serviceMethod() {

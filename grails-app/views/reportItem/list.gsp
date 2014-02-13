@@ -28,7 +28,8 @@
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                 <td><g:link action="show" id="${reportItemInstance.id}">${fieldValue(bean: reportItemInstance, field: "comments")}</g:link></td>
                 <td>${fieldValue(bean: reportItemInstance, field: "hours")}</td>
-                <td><g:formatDate date="${reportItemInstance.releaseDate}"/></td>
+                <td>${fieldValue(bean: reportItemInstance, field: "hours")}</td>
+                <td><g:formatDate date="${reportItemInstance.releaseDate}" type="date" style="SHORT"/></td>
                 <td>${fieldValue(bean: reportItemInstance, field: "task")}</td>
                 <td>${fieldValue(bean: reportItemInstance, field: "project")}</td>
             </tr>

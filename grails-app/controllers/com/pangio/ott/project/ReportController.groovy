@@ -2,110 +2,67 @@ package com.pangio.ott.project
 
 import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.dao.DataIntegrityViolationException
+import com.pangio.ott.user.User
+
+import java.text.SimpleDateFormat
 
 class ReportController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    def reportService
 
     @Secured(["ROLE_USER"])
     def index() {
-        redirect(action: "list", params: params)
+        redirect(action: "build", params: params)
     }
 
     @Secured(["ROLE_USER"])
-    def list(Integer max) {
+    def build(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         [reportInstanceList: Report.list(params), reportInstanceTotal: Report.count()]
     }
 
     @Secured(["ROLE_USER"])
-    def create() {
-        [reportInstance: new Report(params)]
+    def buildReport() {
+        def result = null
+
+        normalizeDates(params)
+
+        if (params.user && params.project) {
+            def user = User.get(params.user)
+            def project = Project.get(params.project)
+            result = reportService.buildUserAndProjectReport(user, project, params.dateFrom, params.dateTo)
+
+        } else if (params.project) {
+            def project = Project.get(params.project)
+            result = reportService.buildProjectReport(project, params.dateFrom, params.dateTo)
+
+        } else if (params.user) {
+            def user = User.get(params.user)
+            result = reportService.buildUserReport(user, params.dateFrom, params.dateTo)
+        }
+
+        render (view: 'result', model: [result: result, resultTotal: result.size()])
     }
 
-    @Secured(["ROLE_USER"])
-    def save() {
-        def reportInstance = new Report(params)
-        if (!reportInstance.save(flush: true)) {
-            render(view: "create", model: [reportInstance: reportInstance])
-            return
+
+    private normalizeDates (params) {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy")
+
+        if (!params.dateTo){
+            params.dateTo = new Date()
+        } else {
+            String dateToString = params.dateTo
+            def Date dateTo = formatter.parse(dateToString)
+            params.dateTo = dateTo
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'report.label', default: 'Report'), reportInstance.id])
-        redirect(action: "show", id: reportInstance.id)
-    }
+        String dateFromString = params.dateFrom
+        def Date dateFrom = formatter.parse(dateFromString)
+        params.dateFrom = dateFrom
 
-    @Secured(["ROLE_USER"])
-    def show(Long id) {
-        def reportInstance = Report.get(id)
-        if (!reportInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'report.label', default: 'Report'), id])
-            redirect(action: "list")
-            return
-        }
+        params
 
-        [reportInstance: reportInstance]
-    }
-
-    @Secured(["ROLE_USER"])
-    def edit(Long id) {
-        def reportInstance = Report.get(id)
-        if (!reportInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'report.label', default: 'Report'), id])
-            redirect(action: "list")
-            return
-        }
-
-        [reportInstance: reportInstance]
-    }
-
-    @Secured(["ROLE_USER"])
-    def update(Long id, Long version) {
-        def reportInstance = Report.get(id)
-        if (!reportInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'report.label', default: 'Report'), id])
-            redirect(action: "list")
-            return
-        }
-
-        if (version != null) {
-            if (reportInstance.version > version) {
-                reportInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [message(code: 'report.label', default: 'Report')] as Object[],
-                        "Another user has updated this Report while you were editing")
-                render(view: "edit", model: [reportInstance: reportInstance])
-                return
-            }
-        }
-
-        reportInstance.properties = params
-
-        if (!reportInstance.save(flush: true)) {
-            render(view: "edit", model: [reportInstance: reportInstance])
-            return
-        }
-
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'report.label', default: 'Report'), reportInstance.id])
-        redirect(action: "show", id: reportInstance.id)
-    }
-
-    @Secured(["ROLE_USER"])
-    def delete(Long id) {
-        def reportInstance = Report.get(id)
-        if (!reportInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'report.label', default: 'Report'), id])
-            redirect(action: "list")
-            return
-        }
-
-        try {
-            reportInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'report.label', default: 'Report'), id])
-            redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'report.label', default: 'Report'), id])
-            redirect(action: "show", id: id)
-        }
     }
 }

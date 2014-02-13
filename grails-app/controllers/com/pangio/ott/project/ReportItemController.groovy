@@ -50,6 +50,7 @@ class ReportItemController {
         redirect(action: "show", id: reportItemInstance.id)
     }
 
+// TODO    ELIMINAR, AFTER CREATE REDIRECT AL LIST
     @Secured(["ROLE_USER"])
     def show(Long id) {
         def reportItemInstance = ReportItem.get(id)
@@ -62,6 +63,7 @@ class ReportItemController {
         [reportItemInstance: reportItemInstance]
     }
 
+//    TODO SOLO DEJAR EDITAR EL COMENTARIO
     @Secured(["ROLE_USER"])
     def edit(Long id) {
         def reportItemInstance = ReportItem.get(id)
@@ -74,6 +76,7 @@ class ReportItemController {
         [reportItemInstance: reportItemInstance]
     }
 
+//    TODO LIMPIAR CODIGO
     @Secured(["ROLE_USER"])
     def update(Long id, Long version) {
         def reportItemInstance = ReportItem.get(id)
@@ -104,23 +107,4 @@ class ReportItemController {
         redirect(action: "show", id: reportItemInstance.id)
     }
 
-    @Secured(["ROLE_USER"])
-    def delete(Long id) {
-        def reportItemInstance = ReportItem.get(id)
-        if (!reportItemInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'reportItem.label', default: 'ReportItem'), id])
-            redirect(action: "list")
-            return
-        }
-
-        try {
-            reportItemInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'reportItem.label', default: 'ReportItem'), id])
-            redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'reportItem.label', default: 'ReportItem'), id])
-            redirect(action: "show", id: id)
-        }
-    }
 }

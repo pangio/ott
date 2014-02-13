@@ -1,4 +1,5 @@
 import com.pangio.ott.project.Project
+import com.pangio.ott.project.ReportItem
 import com.pangio.ott.project.Task
 import com.pangio.ott.user.Role
 import com.pangio.ott.user.User
@@ -18,6 +19,7 @@ class BootStrap {
         createUsers()
         createProjects()
         createTasks()
+        submitHours()
 
     }
 
@@ -120,6 +122,59 @@ class BootStrap {
 //                tasks: [Task.get(6), Task.get(7)],
                 members: [User.get(3)]
         ).save(flush: true)
+    }
+
+    def submitHours (){
+        def reportItem = new ReportItem(
+                releaseDate: new Date(),
+                task: Task.get(1),
+                project: Project.get(1),
+                user: User.get(1),
+                comments: 'diseño',
+                hours: 2L,
+        ).save(flush: true)
+
+        reportItem = new ReportItem(
+                releaseDate: new Date(),
+                task: Task.get(2),
+                project: Project.get(1),
+                user: User.get(1),
+                comments: 'diseño',
+                hours: 2L,
+        ).save(flush: true)
+        reportItem = new ReportItem(
+                releaseDate: new Date(),
+                task: Task.get(3),
+                project: Project.get(1),
+                user: User.get(1),
+                comments: 'diseño',
+                hours: 4L,
+        ).save(flush: true)
+        reportItem = new ReportItem(
+                releaseDate: new Date(),
+                task: Task.get(1),
+                project: Project.get(2),
+                user: User.get(1),
+                comments: 'diseño',
+                hours: 4L,
+        ).save(flush: true)
+        reportItem = new ReportItem(
+                releaseDate: new Date(),
+                task: Task.get(1),
+                project: Project.get(2),
+                user: User.get(1),
+                comments: 'diseño',
+                hours: 8L,
+        ).save(flush: true)
+        reportItem = new ReportItem(
+                releaseDate: new Date(),
+                task: Task.get(2),
+                project: Project.get(2),
+                user: User.get(1),
+                comments: 'diseño',
+                hours: 8L,
+        ).save(flush: true)
+
     }
 
     def destroy = {
