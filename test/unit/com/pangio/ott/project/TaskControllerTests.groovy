@@ -1,9 +1,7 @@
 package com.pangio.ott.project
 
-
-
-import org.junit.*
-import grails.test.mixin.*
+import grails.test.mixin.Mock
+import grails.test.mixin.TestFor
 
 @TestFor(TaskController)
 @Mock(Task)

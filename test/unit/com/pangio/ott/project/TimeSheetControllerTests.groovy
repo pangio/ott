@@ -1,13 +1,11 @@
 package com.pangio.ott.project
 
+import grails.test.mixin.Mock
+import grails.test.mixin.TestFor
 
-
-import org.junit.*
-import grails.test.mixin.*
-
-@TestFor(ReportItemController)
-@Mock(ReportItem)
-class ReportItemControllerTests {
+@TestFor(TimeSheetController)
+@Mock(TimeSheet)
+class TimeSheetControllerTests {
 
     def populateValidParams(params) {
         assert params != null
@@ -47,7 +45,7 @@ class ReportItemControllerTests {
 
         assert response.redirectedUrl == '/reportItem/show/1'
         assert controller.flash.message != null
-        assert ReportItem.count() == 1
+        assert TimeSheet.count() == 1
     }
 
     void testShow() {
@@ -57,7 +55,7 @@ class ReportItemControllerTests {
         assert response.redirectedUrl == '/reportItem/list'
 
         populateValidParams(params)
-        def reportItem = new ReportItem(params)
+        def reportItem = new TimeSheet(params)
 
         assert reportItem.save() != null
 
@@ -75,7 +73,7 @@ class ReportItemControllerTests {
         assert response.redirectedUrl == '/reportItem/list'
 
         populateValidParams(params)
-        def reportItem = new ReportItem(params)
+        def reportItem = new TimeSheet(params)
 
         assert reportItem.save() != null
 
@@ -95,7 +93,7 @@ class ReportItemControllerTests {
         response.reset()
 
         populateValidParams(params)
-        def reportItem = new ReportItem(params)
+        def reportItem = new TimeSheet(params)
 
         assert reportItem.save() != null
 
@@ -139,17 +137,17 @@ class ReportItemControllerTests {
         response.reset()
 
         populateValidParams(params)
-        def reportItem = new ReportItem(params)
+        def reportItem = new TimeSheet(params)
 
         assert reportItem.save() != null
-        assert ReportItem.count() == 1
+        assert TimeSheet.count() == 1
 
         params.id = reportItem.id
 
         controller.delete()
 
-        assert ReportItem.count() == 0
-        assert ReportItem.get(reportItem.id) == null
+        assert TimeSheet.count() == 0
+        assert TimeSheet.get(reportItem.id) == null
         assert response.redirectedUrl == '/reportItem/list'
     }
 }

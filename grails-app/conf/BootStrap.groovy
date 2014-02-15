@@ -1,6 +1,6 @@
 import com.pangio.ott.project.Project
-import com.pangio.ott.project.ReportItem
 import com.pangio.ott.project.Task
+import com.pangio.ott.project.TimeSheet
 import com.pangio.ott.user.Role
 import com.pangio.ott.user.User
 import com.pangio.ott.user.UserRole
@@ -123,7 +123,7 @@ class BootStrap {
     }
 
     def submitHours (){
-        def reportItem = new ReportItem(
+        def reportItem = new TimeSheet(
                 releaseDate: new Date(),
                 task: Task.get(1),
                 project: Project.get(1),
@@ -132,7 +132,7 @@ class BootStrap {
                 hours: 2L,
         ).save(flush: true)
 
-        reportItem = new ReportItem(
+        reportItem = new TimeSheet(
                 releaseDate: new Date(),
                 task: Task.get(2),
                 project: Project.get(1),
@@ -140,7 +140,7 @@ class BootStrap {
                 comments: 'diseño',
                 hours: 2L,
         ).save(flush: true)
-        reportItem = new ReportItem(
+        reportItem = new TimeSheet(
                 releaseDate: new Date(),
                 task: Task.get(3),
                 project: Project.get(1),
@@ -148,7 +148,7 @@ class BootStrap {
                 comments: 'diseño',
                 hours: 4L,
         ).save(flush: true)
-        reportItem = new ReportItem(
+        reportItem = new TimeSheet(
                 releaseDate: new Date(),
                 task: Task.get(1),
                 project: Project.get(2),
@@ -156,7 +156,7 @@ class BootStrap {
                 comments: 'diseño',
                 hours: 4L,
         ).save(flush: true)
-        reportItem = new ReportItem(
+        reportItem = new TimeSheet(
                 releaseDate: new Date(),
                 task: Task.get(1),
                 project: Project.get(2),
@@ -164,7 +164,7 @@ class BootStrap {
                 comments: 'diseño',
                 hours: 8L,
         ).save(flush: true)
-        reportItem = new ReportItem(
+        reportItem = new TimeSheet(
                 releaseDate: new Date(),
                 task: Task.get(2),
                 project: Project.get(2),

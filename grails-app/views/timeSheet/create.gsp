@@ -1,9 +1,9 @@
-<%@ page import="com.pangio.ott.project.ReportItem" %>
+<%@ page import="com.pangio.ott.project.TimeSheet" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'reportItem.label', default: 'ReportItem')}" />
+		<g:set var="entityName" value="${message(code: 'reportItem.label', default: 'TimeSheet')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 	</head>
 	<body>

@@ -1,9 +1,7 @@
 package com.pangio.ott.user
 
-
-
-import org.junit.*
-import grails.test.mixin.*
+import grails.test.mixin.Mock
+import grails.test.mixin.TestFor
 
 @TestFor(UserController)
 @Mock(User)

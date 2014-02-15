@@ -2,7 +2,7 @@ package com.pangio.ott.project
 
 class Report {
 
-    static hasMany = [items : ReportItem]
+    static hasMany = [items : TimeSheet]
 
     static constraints = {
     }

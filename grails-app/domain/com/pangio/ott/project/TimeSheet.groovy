@@ -2,7 +2,7 @@ package com.pangio.ott.project
 
 import com.pangio.ott.user.User
 
-class ReportItem {
+class TimeSheet {
 
     Task task
     User user

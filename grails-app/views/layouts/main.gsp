@@ -49,7 +49,7 @@
                         <li><g:link controller="task" action="list">Tasks</g:link></li>
                         <li><g:link controller="project" action="list">Projects</g:link></li>
                         <li><g:link controller="report" action="build">Reports</g:link></li>
-                        <li><g:link controller="reportItem" action="list">Submit Time</g:link></li>
+                        <li><g:link controller="timeSheet" action="list">Submit Time</g:link></li>
                         <li><g:link controller="user" action="list">Users</g:link></li>
                         <li><a class="home" href="${createLink(uri: '/')}">About</a></li>
                     </ul>

@@ -1,8 +1,7 @@
 package com.pangio.ott.project
 
-import grails.plugin.springsecurity.annotation.Secured
-import org.springframework.dao.DataIntegrityViolationException
 import com.pangio.ott.user.User
+import grails.plugin.springsecurity.annotation.Secured
 
 import java.text.SimpleDateFormat
 

@@ -2,14 +2,13 @@ package com.pangio.ott.project
 
 import com.pangio.ott.user.User
 import grails.plugin.springsecurity.annotation.Secured
-import org.springframework.dao.DataIntegrityViolationException
 
 @Secured(["ROLE_ADMIN", "ROLE_SUPERUSER", "ROLE_USER"])
-class ReportItemController {
+class TimeSheetController {
 
     def springSecurityService
     def projectService
-    def reportItemService
+    def timeSheetService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -26,20 +25,20 @@ class ReportItemController {
         def userInstance = User.get(springUser.id)
         def assignedProjects = projectService.getAssignedProjects(userInstance.id)
 
-        def reportItems = new ArrayList<ReportItem>()
-        reportItems = reportItemService.getAllReportItemsByUser(userInstance.id)
+        def reportItems = new ArrayList<TimeSheet>()
+        reportItems = timeSheetService.getAllReportItemsByUser(userInstance.id)
 
         [reportItemInstanceList: reportItems, reportItemInstanceTotal: reportItems.size(), assignedProjects: assignedProjects]
     }
 
     @Secured(["ROLE_USER"])
     def create() {
-        [reportItemInstance: new ReportItem(params)]
+        [reportItemInstance: new TimeSheet(params)]
     }
 
     @Secured(["ROLE_USER"])
     def save() {
-        def reportItemInstance = new ReportItem(params)
+        def reportItemInstance = new TimeSheet(params)
         def springUser = springSecurityService.getPrincipal()
         def userInstance = User.get(springUser.id)
         reportItemInstance.user = userInstance
@@ -50,16 +49,16 @@ class ReportItemController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'reportItem.label', default: 'ReportItem'), reportItemInstance.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'reportItem.label', default: 'TimeSheet'), reportItemInstance.id])
         redirect(action: "show", id: reportItemInstance.id)
     }
 
 // TODO    ELIMINAR, AFTER CREATE REDIRECT AL LIST
     @Secured(["ROLE_USER"])
     def show(Long id) {
-        def reportItemInstance = ReportItem.get(id)
+        def reportItemInstance = TimeSheet.get(id)
         if (!reportItemInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'reportItem.label', default: 'ReportItem'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'reportItem.label', default: 'TimeSheet'), id])
             redirect(action: "list")
             return
         }
@@ -70,9 +69,9 @@ class ReportItemController {
 //    TODO SOLO DEJAR EDITAR EL COMENTARIO
     @Secured(["ROLE_USER"])
     def edit(Long id) {
-        def reportItemInstance = ReportItem.get(id)
+        def reportItemInstance = TimeSheet.get(id)
         if (!reportItemInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'reportItem.label', default: 'ReportItem'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'reportItem.label', default: 'TimeSheet'), id])
             redirect(action: "list")
             return
         }
@@ -83,9 +82,9 @@ class ReportItemController {
 //    TODO LIMPIAR CODIGO
     @Secured(["ROLE_USER"])
     def update(Long id, Long version) {
-        def reportItemInstance = ReportItem.get(id)
+        def reportItemInstance = TimeSheet.get(id)
         if (!reportItemInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'reportItem.label', default: 'ReportItem'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'reportItem.label', default: 'TimeSheet'), id])
             redirect(action: "list")
             return
         }
@@ -93,8 +92,8 @@ class ReportItemController {
         if (version != null) {
             if (reportItemInstance.version > version) {
                 reportItemInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [message(code: 'reportItem.label', default: 'ReportItem')] as Object[],
-                        "Another user has updated this ReportItem while you were editing")
+                        [message(code: 'reportItem.label', default: 'TimeSheet')] as Object[],
+                        "Another user has updated this TimeSheet while you were editing")
                 render(view: "edit", model: [reportItemInstance: reportItemInstance])
                 return
             }
@@ -107,7 +106,7 @@ class ReportItemController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'reportItem.label', default: 'ReportItem'), reportItemInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'reportItem.label', default: 'TimeSheet'), reportItemInstance.id])
         redirect(action: "show", id: reportItemInstance.id)
     }
 

@@ -1,4 +1,4 @@
-<%@ page import="com.pangio.ott.project.ReportItem" %>
+<%@ page import="com.pangio.ott.project.TimeSheet" %>
 
 <r:require modules="chosen,timepicker"/>
 <r:script>

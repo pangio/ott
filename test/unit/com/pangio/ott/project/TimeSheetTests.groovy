@@ -1,17 +1,12 @@
 package com.pangio.ott.project
 
-import com.pangio.ott.user.Role
-import com.pangio.ott.user.User
-import com.pangio.ott.user.UserRole
-import grails.test.GrailsUnitTestCase
-import grails.test.mixin.*
-import org.junit.*
+import grails.test.mixin.TestFor
 
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@TestFor(ReportItem)
-class ReportItemTests {
+@TestFor(TimeSheet)
+class TimeSheetTests {
 
     void setUp() {
     }
