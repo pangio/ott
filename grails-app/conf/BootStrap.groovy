@@ -107,19 +107,17 @@ class BootStrap {
         def project = new Project(
                 name: 'Website on dev',
                 description: 'offshore team',
-//                tasks: [Task.get(1),Task.get(5), Task.get(3)],
-                members: [User.get(4), User.get(2), User.get(3)]
+                members: [User.get(4), User.get(2), User.get(3),User.get(1)]
         ).save(flush: true)
         project = new Project(
                 name: 'Website in Testing',
                 description: 'onsite team',
-//                tasks: [Task.get(2), Task.get(2), Task.get(4)],
-                members: [User.get(4), User.get(5)]
+                members: [User.get(4), User.get(5), User.get(1)]
         ).save(flush: true)
         project = new Project(
                 name: 'Admin Stuff',
                 description: 'accountant, financial, administration',
-//                tasks: [Task.get(6), Task.get(7)],
+                tasks: [Task.get(6), Task.get(7)],
                 members: [User.get(3)]
         ).save(flush: true)
     }

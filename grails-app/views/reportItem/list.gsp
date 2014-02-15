@@ -13,29 +13,6 @@
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
-    <table>
-        <thead>
-        <tr>
-            <g:sortableColumn property="comments" title="${message(code: 'default.comments.label', default: 'Comments')}"/>
-            <g:sortableColumn property="hours" title="${message(code: 'default.hours.label', default: 'Hours')}"/>
-            <g:sortableColumn property="releaseDate" title="${message(code: 'default.release.date.label', default: 'Release Date')}"/>
-            <th><g:message code="default.task.label" default="Task"/></th>
-            <th><g:message code="default.project.label" default="Project"/></th>
-        </tr>
-        </thead>
-        <tbody>
-        <g:each in="${reportItemInstanceList}" status="i" var="reportItemInstance">
-            <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                <td><g:link action="show" id="${reportItemInstance.id}">${fieldValue(bean: reportItemInstance, field: "comments")}</g:link></td>
-                <td>${fieldValue(bean: reportItemInstance, field: "hours")}</td>
-                <td>${fieldValue(bean: reportItemInstance, field: "hours")}</td>
-                <td><g:formatDate date="${reportItemInstance.releaseDate}" type="date" style="SHORT"/></td>
-                <td>${fieldValue(bean: reportItemInstance, field: "task")}</td>
-                <td>${fieldValue(bean: reportItemInstance, field: "project")}</td>
-            </tr>
-        </g:each>
-        </tbody>
-    </table>
     <g:each in="${assignedProjects}" status="i" var="projectInstance">
         <div class="accordion" id="accordion-${projectInstance.name}">
             <div class="accordion-group">
@@ -44,15 +21,46 @@
                        href="#collapse-${projectInstance.id}">
                         <div class="message span10" role="status">${projectInstance.name}</div>
                     </a>
-                        <g:link class="btn btn-info" action="create" params="[projectId: projectInstance.id]">
-                            <g:message code="default.button.hours.submit.label"/>
-                        </g:link>
+                    <g:link class="btn btn-info" action="create" params="[projectId: projectInstance.id]">
+                        <g:message code="default.button.hours.submit.label"/>
+                    </g:link>
                 </div>
 
                 <div id="collapse-${projectInstance.id}" class="accordion-body collapse in">
                     <div class="accordion-inner">
                         <div class="message" role="status">${projectInstance.description}</div>
                     </div>
+
+                    <g:if test="${reportItemInstanceList != null && !reportItemInstanceList.isEmpty()}">
+                        <table>
+                            <thead>
+                            <tr>
+                                <g:sortableColumn property="task" title="${message(code: 'default.task.label', default: 'Task')}"/>
+                                <g:sortableColumn property="hours" title="${message(code: 'default.hours.label', default: 'Hours')}"/>
+                                <g:sortableColumn property="releaseDate" title="${message(code: 'default.release.date.label', default: 'Release Date')}"/>
+                                <g:sortableColumn property="comments" title="${message(code: 'default.comments.label', default: 'Comments')}"/>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <g:each in="${reportItemInstanceList}" status="ri" var="reportItemInstance">
+
+                                <g:if test="${reportItemInstance.project.name == projectInstance.name}">
+                                    <tr class="${(ri % 2) == 0 ? 'even' : 'odd'}">
+                                        <td>${fieldValue(bean: reportItemInstance, field: "task")}</td>
+                                        <td>${fieldValue(bean: reportItemInstance, field: "hours")}</td>
+                                        <td><g:formatDate date="${reportItemInstance.releaseDate}" type="date" style="SHORT"/></td>
+                                        <td>${fieldValue(bean: reportItemInstance, field: "comments")}</td>
+                                    </tr>
+                                </g:if>
+                            </g:each>
+                            </tbody>
+                        </table>
+                    </g:if>
+                    <g:else>
+                        <div>
+                            No submits yet. Please submit your hours
+                        </div>
+                    </g:else>
                 </div>
             </div>
         </div>

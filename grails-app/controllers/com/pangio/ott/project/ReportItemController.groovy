@@ -9,6 +9,7 @@ class ReportItemController {
 
     def springSecurityService
     def projectService
+    def reportItemService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -25,7 +26,10 @@ class ReportItemController {
         def userInstance = User.get(springUser.id)
         def assignedProjects = projectService.getAssignedProjects(userInstance.id)
 
-        [reportItemInstanceList: ReportItem.list(params), reportItemInstanceTotal: ReportItem.count(), assignedProjects: assignedProjects]
+        def reportItems = new ArrayList<ReportItem>()
+        reportItems = reportItemService.getAllReportItemsByUser(userInstance.id)
+
+        [reportItemInstanceList: reportItems, reportItemInstanceTotal: reportItems.size(), assignedProjects: assignedProjects]
     }
 
     @Secured(["ROLE_USER"])
