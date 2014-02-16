@@ -25,9 +25,22 @@ class ReportController {
     def buildReport() {
         def result = null
 
-        normalizeDates(params)
+        if (params.user == null && params.project == null) {
+            flash.message = message(code: 'error.user.project.mandatory.message')
+            redirect(action: "build")
+            return
+        }
 
-        if (params.user && params.project) {
+        if (!params.dateFrom) {
+            flash.message = message(code: 'error.date.from.mandatory.message')
+            redirect(action: "build")
+            return
+        } else {
+            normalizeDates(params)
+        }
+
+
+        if (params.user != null && params.project != null) {
             def user = User.get(params.user)
             def project = Project.get(params.project)
             result = reportService.buildUserAndProjectReport(user, project, params.dateFrom, params.dateTo)

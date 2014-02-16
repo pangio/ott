@@ -21,7 +21,7 @@
                 <g:sortableColumn property="project" title="${message(code: 'default.project.label', default: 'Project')}" />
                 <g:sortableColumn property="task" title="${message(code: 'default.task.label', default: 'Task')}" />
                 <g:sortableColumn property="hours" title="${message(code: 'default.hours.label', default: 'Hours')}" />
-                <g:sortableColumn property="releaseDAte" title="${message(code: 'default.release.date.label', default: 'Date')}" />
+                <g:sortableColumn property="releaseDate" title="${message(code: 'default.release.date.label', default: 'Date')}" />
             </tr>
             </thead>
             <tbody>
@@ -32,7 +32,7 @@
                     <td>${fieldValue(bean: resultInstance, field: "project")}</td>
                     <td>${fieldValue(bean: resultInstance, field: "task")}</td>
                     <td>${fieldValue(bean: resultInstance, field: "hours")}</td>
-                    <td>${fieldValue(bean: resultInstance, field: "releaseDate")}</td>
+                    <td><g:formatDate date="${resultInstance.releaseDate}" type="date" style="SHORT"/></td>
                 </tr>
             </g:each>
             </tbody>
