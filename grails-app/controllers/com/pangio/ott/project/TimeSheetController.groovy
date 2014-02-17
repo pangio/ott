@@ -9,6 +9,7 @@ class TimeSheetController {
     def springSecurityService
     def projectService
     def timeSheetService
+    def grailsApplication
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -25,6 +26,8 @@ class TimeSheetController {
         def userInstance = User.get(springUser.id)
         def assignedProjects = projectService.getAssignedProjects(userInstance.id)
 
+        // TODO get and send to view one list per project
+        // TODO fix view to support it
         def reportItems = new ArrayList<TimeSheet>()
         reportItems = timeSheetService.getAllReportItemsByUser(userInstance.id)
 
@@ -38,11 +41,18 @@ class TimeSheetController {
 
     @Secured(["ROLE_USER"])
     def save() {
+
+        Long limit = grailsApplication.config.ott.extraHoursLimit
+
         def reportItemInstance = new TimeSheet(params)
         def springUser = springSecurityService.getPrincipal()
         def userInstance = User.get(springUser.id)
         reportItemInstance.user = userInstance
         reportItemInstance.project = Project.get(params.projectId)
+
+        if (reportItemInstance.hours > limit){
+            reportItemInstance.extra = new Long(params.hours) - new Long(limit)
+        }
 
         if (!reportItemInstance.save(flush: true)) {
             render(view: "create", model: [reportItemInstance: reportItemInstance])

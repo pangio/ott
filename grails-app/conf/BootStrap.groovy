@@ -107,12 +107,12 @@ class BootStrap {
         def project = new Project(
                 name: 'Website on dev',
                 description: 'offshore team',
-                members: [User.get(4), User.get(2), User.get(3),User.get(1)]
+                members: [User.get(4), User.get(2),User.get(1)]
         ).save(flush: true)
         project = new Project(
                 name: 'Website in Testing',
                 description: 'onsite team',
-                members: [User.get(4), User.get(5), User.get(1)]
+                members: [User.get(3), User.get(5), User.get(1)]
         ).save(flush: true)
         project = new Project(
                 name: 'Admin Stuff',
@@ -130,6 +130,7 @@ class BootStrap {
                 user: User.get(1),
                 comments: 'diseño',
                 hours: 2L,
+                extra: 0L
         ).save(flush: true)
 
         reportItem = new TimeSheet(
@@ -139,6 +140,7 @@ class BootStrap {
                 user: User.get(1),
                 comments: 'diseño',
                 hours: 2L,
+                extra: 0L
         ).save(flush: true)
         reportItem = new TimeSheet(
                 date: new Date(),
@@ -147,6 +149,7 @@ class BootStrap {
                 user: User.get(1),
                 comments: 'diseño',
                 hours: 4L,
+                extra: 0L
         ).save(flush: true)
         reportItem = new TimeSheet(
                 date: new Date(),
@@ -155,6 +158,7 @@ class BootStrap {
                 user: User.get(1),
                 comments: 'diseño',
                 hours: 4L,
+                extra: 0L
         ).save(flush: true)
         reportItem = new TimeSheet(
                 date: new Date(),
@@ -163,14 +167,16 @@ class BootStrap {
                 user: User.get(1),
                 comments: 'diseño',
                 hours: 8L,
+                extra: 4L
         ).save(flush: true)
         reportItem = new TimeSheet(
                 date: new Date(),
                 task: Task.get(2),
                 project: Project.get(2),
-                user: User.get(1),
+                user: User.get(3),
                 comments: 'diseño',
                 hours: 8L,
+                extra: 4L
         ).save(flush: true)
 
     }

@@ -12,7 +12,7 @@
     return this;
     };
 
-    $( "#releaseDate" ).datepicker({
+    $( "#date" ).datepicker({
         defaultDate: new Date(),
         changeMonth: false,
         numberOfMonths: 1,
@@ -39,11 +39,11 @@
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: reportItemInstance, field: 'date', 'error')} required">
-	<label for="releaseDate">
-		<g:message code="reportItem.releaseDate.label" default="Release Date" />
+	<label for="date">
+		<g:message code="reportItem.date.label" default="Date" />
 		<span class="required-indicator">*</span>
 	</label>
-    <jqueryPicker:date name="releaseDate" id="releaseDate"  value="${reportItemInstance?.releaseDate}"  />
+    <jqueryPicker:date name="date" id="date"  value="${reportItemInstance?.date}"  />
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: reportItemInstance, field: 'task', 'error')} required">

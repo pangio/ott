@@ -32,29 +32,33 @@
                     </div>
 
                     <g:if test="${reportItemInstanceList != null && !reportItemInstanceList.isEmpty()}">
-                        <table>
-                            <thead>
-                            <tr>
-                                <g:sortableColumn property="task" title="${message(code: 'default.task.label', default: 'Task')}"/>
-                                <g:sortableColumn property="hours" title="${message(code: 'default.hours.label', default: 'Hours')}"/>
-                                <g:sortableColumn property="releaseDate" title="${message(code: 'default.release.date.label', default: 'Release Date')}"/>
-                                <g:sortableColumn property="comments" title="${message(code: 'default.comments.label', default: 'Comments')}"/>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <g:each in="${reportItemInstanceList}" status="ri" var="reportItemInstance">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <g:sortableColumn property="task" title="${message(code: 'default.task.label', default: 'Task')}"/>
+                                    <g:sortableColumn property="hours" title="${message(code: 'default.hours.label', default: 'Hours')}"/>
+                                    <g:sortableColumn property="extra" title="${message(code: 'default.extra.label', default: 'Extra')}"/>
+                                    <g:sortableColumn property="date" title="${message(code: 'default.date.label', default: 'Date')}"/>
+                                    <g:sortableColumn property="comments" title="${message(code: 'default.comments.label', default: 'Comments')}"/>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <g:each in="${reportItemInstanceList}" status="ri" var="reportItemInstance">
 
-                                <g:if test="${reportItemInstance.project.name == projectInstance.name}">
-                                    <tr class="${(ri % 2) == 0 ? 'even' : 'odd'}">
-                                        <td>${fieldValue(bean: reportItemInstance, field: "task")}</td>
-                                        <td>${fieldValue(bean: reportItemInstance, field: "hours")}</td>
-                                        <td><g:formatDate date="${reportItemInstance.date}" type="date" style="SHORT"/></td>
-                                        <td>${fieldValue(bean: reportItemInstance, field: "comments")}</td>
-                                    </tr>
-                                </g:if>
-                            </g:each>
-                            </tbody>
-                        </table>
+                                    <g:if test="${reportItemInstance.project.name == projectInstance.name}">
+                                        <tr class="${(ri % 2) == 0 ? 'even' : 'odd'}">
+                                            <td>${fieldValue(bean: reportItemInstance, field: "task")}</td>
+                                            <td>${fieldValue(bean: reportItemInstance, field: "hours")}</td>
+                                            <td>${fieldValue(bean: reportItemInstance, field: "extra")}</td>
+                                            <td><g:formatDate date="${reportItemInstance.date}" type="date" style="SHORT"/></td>
+                                            <td>${fieldValue(bean: reportItemInstance, field: "comments")}</td>
+                                        </tr>
+                                    </g:if>
+                                </g:each>
+                                </tbody>
+                          </table>
+                        </div>
                     </g:if>
                     <g:else>
                         <div>
