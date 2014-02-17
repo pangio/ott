@@ -38,7 +38,7 @@
 	<g:field name="hours" type="number" value="${reportItemInstance.hours}" required=""/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: reportItemInstance, field: 'releaseDate', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: reportItemInstance, field: 'date', 'error')} required">
 	<label for="releaseDate">
 		<g:message code="reportItem.releaseDate.label" default="Release Date" />
 		<span class="required-indicator">*</span>

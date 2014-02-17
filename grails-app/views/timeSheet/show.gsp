@@ -26,10 +26,10 @@
 						<span class="property-value" aria-labelledby="hours-label"><g:fieldValue bean="${reportItemInstance}" field="hours"/></span>
 				</li>
 				</g:if>
-				<g:if test="${reportItemInstance?.releaseDate}">
+				<g:if test="${reportItemInstance?.date}">
 				<li class="fieldcontain">
 					<span id="releaseDate-label" class="property-label"><g:message code="reportItem.releaseDate.label" default="Release Date" /></span>
-						<span class="property-value" aria-labelledby="releaseDate-label"><g:formatDate date="${reportItemInstance?.releaseDate}" /></span>
+						<span class="property-value" aria-labelledby="releaseDate-label"><g:formatDate date="${reportItemInstance?.date}" /></span>
 				</li>
 				</g:if>
 				<g:if test="${reportItemInstance?.task}">

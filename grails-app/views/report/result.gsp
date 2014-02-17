@@ -32,7 +32,7 @@
                     <td>${fieldValue(bean: resultInstance, field: "project")}</td>
                     <td>${fieldValue(bean: resultInstance, field: "task")}</td>
                     <td>${fieldValue(bean: resultInstance, field: "hours")}</td>
-                    <td><g:formatDate date="${resultInstance.releaseDate}" type="date" style="SHORT"/></td>
+                    <td><g:formatDate date="${resultInstance.date}" type="date" style="SHORT"/></td>
                 </tr>
             </g:each>
             </tbody>

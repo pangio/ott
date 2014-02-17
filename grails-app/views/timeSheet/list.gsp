@@ -48,7 +48,7 @@
                                     <tr class="${(ri % 2) == 0 ? 'even' : 'odd'}">
                                         <td>${fieldValue(bean: reportItemInstance, field: "task")}</td>
                                         <td>${fieldValue(bean: reportItemInstance, field: "hours")}</td>
-                                        <td><g:formatDate date="${reportItemInstance.releaseDate}" type="date" style="SHORT"/></td>
+                                        <td><g:formatDate date="${reportItemInstance.date}" type="date" style="SHORT"/></td>
                                         <td>${fieldValue(bean: reportItemInstance, field: "comments")}</td>
                                     </tr>
                                 </g:if>

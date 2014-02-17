@@ -124,7 +124,7 @@ class BootStrap {
 
     def submitHours (){
         def reportItem = new TimeSheet(
-                releaseDate: new Date(),
+                date: new Date(),
                 task: Task.get(1),
                 project: Project.get(1),
                 user: User.get(1),
@@ -133,7 +133,7 @@ class BootStrap {
         ).save(flush: true)
 
         reportItem = new TimeSheet(
-                releaseDate: new Date(),
+                date: new Date(),
                 task: Task.get(2),
                 project: Project.get(1),
                 user: User.get(1),
@@ -141,7 +141,7 @@ class BootStrap {
                 hours: 2L,
         ).save(flush: true)
         reportItem = new TimeSheet(
-                releaseDate: new Date(),
+                date: new Date(),
                 task: Task.get(3),
                 project: Project.get(1),
                 user: User.get(1),
@@ -149,7 +149,7 @@ class BootStrap {
                 hours: 4L,
         ).save(flush: true)
         reportItem = new TimeSheet(
-                releaseDate: new Date(),
+                date: new Date(),
                 task: Task.get(1),
                 project: Project.get(2),
                 user: User.get(1),
@@ -157,7 +157,7 @@ class BootStrap {
                 hours: 4L,
         ).save(flush: true)
         reportItem = new TimeSheet(
-                releaseDate: new Date(),
+                date: new Date(),
                 task: Task.get(1),
                 project: Project.get(2),
                 user: User.get(1),
@@ -165,7 +165,7 @@ class BootStrap {
                 hours: 8L,
         ).save(flush: true)
         reportItem = new TimeSheet(
-                releaseDate: new Date(),
+                date: new Date(),
                 task: Task.get(2),
                 project: Project.get(2),
                 user: User.get(1),

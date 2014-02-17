@@ -7,7 +7,7 @@ class TimeSheet {
     Task task
     User user
     Long hours
-    Date releaseDate
+    Date date
     String comments
     Project project
 
