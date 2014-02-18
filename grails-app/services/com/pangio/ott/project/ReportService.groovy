@@ -19,6 +19,17 @@ class ReportService {
         return projectAndUserReport
     }
 
+    def List<Project> buildCritcalProjectsReport () {
+        List<TimeSheet> timeSheets =  TimeSheet.findAllByExtraGreaterThan(0)
+        List<Project> critalProjectsReport = new ArrayList<Project>()
+        timeSheets.each {
+            if (!critalProjectsReport.contains(it.project)){
+                critalProjectsReport.add(it.project)
+            }
+        }
+        return critalProjectsReport
+    }
+
     def serviceMethod() {
 
     }

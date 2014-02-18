@@ -8,7 +8,7 @@ class TimeSheetService {
 
     }
 
-    def getAllReportItemsByUser(Long userId) {
+    def getAllTimesheetsByUser(Long userId) {
 
         def user = User.get(userId)
         def reportItems = new ArrayList<TimeSheet>()

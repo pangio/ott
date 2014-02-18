@@ -44,41 +44,66 @@
             <div class="navbar-inner">
                 <div class="container">
                     <ul class="nav">
+
+                        <div class="dropdown">
+                            <!-- Link or button to toggle dropdown -->
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <li><a tabindex="-1" href="#">Action</a></li>
+                                <li><a tabindex="-1" href="#">Another action</a></li>
+                                <li><a tabindex="-1" href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li><a tabindex="-1" href="#">Separated link</a></li>
+                            </ul>
+                        </div>
+
                         <li><g:link uri="/" class="brand"><i class="icon-home icon-white"></i></g:link></li>
-                        <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                        <li><g:link controller="task" action="list">Tasks</g:link></li>
-                        <li><g:link controller="project" action="list">Projects</g:link></li>
-                        <li><g:link controller="report" action="build">Reports</g:link></li>
-                        <li><g:link controller="timeSheet" action="list">Submit Time</g:link></li>
-                        <li><g:link controller="user" action="list">Users</g:link></li>
-                        <li><a class="home" href="${createLink(uri: '/')}">About</a></li>
+                        <li><g:link controller="home" action="home"><g:message code="default.home.label"/></g:link></li>
+
+                        <sec:ifAnyGranted roles="ROLE_ADMIN">
+                            <li><g:link controller="task" action="list">Tasks</g:link></li>
+                            <li><g:link controller="project" action="list">Projects</g:link></li>
+                            <li><g:link controller="user" action="list">Users</g:link></li>
+                            <ul class="nav">
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown">Reports <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><g:link controller="report" action="buildByUser">User</g:link></li>
+                                        <li><g:link controller="report" action="buildByProject">Project</g:link></li>
+                                        <li><g:link controller="report"
+                                                    action="buildCriticalProjects">Critical Project</g:link></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </sec:ifAnyGranted>
+                        <li><g:link controller="timeSheet" action="list">Timesheet</g:link></li>
+                        <li><g:link controller="home" action="about">About</g:link></li>
                     </ul>
 
-                    <div class="pull-right">
+                    <div class="navbar-text pull-right">
                         <sec:ifLoggedIn>
+                            <p class="navbar-text pull-right">
+                                %{--<ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">--}%
                             <ul class="nav pull-right">
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <g:message code="welcome.user.label"/>
-                            <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><g:link controller="user" action="profile"><g:message
-                                        code="default.profile.label"/></g:link></li>
-                                <li><g:link controller="logout" action="index"><g:message
-                                        code="default.logout.label"/></g:link></li>
+                                <li class="dropdown pull-right"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <g:message code="welcome.user.label"/> <sec:loggedInUserInfo field='username'/>
+                                    <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><g:link controller="user" action="profile"><g:message code="default.profile.label"/></g:link></li>
+                                        <li><g:link controller="logout" action="index"><g:message code="default.logout.label"/></g:link></li>
+                                    </ul>
+                                </li>
                             </ul>
-                            </li>
+                            </p>
+
                         </sec:ifLoggedIn>
                         <sec:ifNotLoggedIn>
                             <p class="navbar-text pull-right">
-                                <g:link controller="login" action="index"><g:message
-                                        code="default.login.label"/></g:link>
-                                <g:link controller="user" action="register"><g:message
-                                        code="default.register.label"/></g:link>
+                                <g:link controller="login" action="index"><g:message code="default.login.label"/></g:link>
+                                <g:link controller="user" action="register"><g:message code="default.register.label"/></g:link>
                             </p>
                         </sec:ifNotLoggedIn>
                     </div>
+
                 </div>
             </div>
         </div>

@@ -29,7 +29,7 @@ class TimeSheetController {
         // TODO get and send to view one list per project
         // TODO fix view to support it
         def reportItems = new ArrayList<TimeSheet>()
-        reportItems = timeSheetService.getAllReportItemsByUser(userInstance.id)
+        reportItems = timeSheetService.getAllTimesheetsByUser(userInstance.id)
 
         [reportItemInstanceList: reportItems, reportItemInstanceTotal: reportItems.size(), assignedProjects: assignedProjects]
     }

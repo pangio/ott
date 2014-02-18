@@ -16,9 +16,23 @@ class ReportController {
     }
 
     @Secured(["ROLE_USER"])
-    def build(Integer max) {
+    def buildByUser(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         [reportInstanceList: Report.list(params), reportInstanceTotal: Report.count()]
+    }
+
+    @Secured(["ROLE_USER"])
+    def buildByProject(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        [reportInstanceList: Report.list(params), reportInstanceTotal: Report.count()]
+    }
+
+    @Secured(["ROLE_USER"])
+    def buildCriticalProjects(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        def result = reportService.buildCritcalProjectsReport()
+        render (view: 'criticalProjects', model: [result: result, resultTotal: result.size(), params: params])
+
     }
 
     @Secured(["ROLE_USER"])
