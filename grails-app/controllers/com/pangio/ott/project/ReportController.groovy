@@ -8,73 +8,57 @@ import java.text.SimpleDateFormat
 class ReportController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+
     def reportService
 
-    @Secured(["ROLE_USER"])
-    def index() {
-        redirect(action: "build", params: params)
+    @Secured(["ROLE_ADMIN"])
+    def buildByUser() {
     }
 
-    @Secured(["ROLE_USER"])
-    def buildByUser(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        [reportInstanceList: Report.list(params), reportInstanceTotal: Report.count()]
+    @Secured(["ROLE_ADMIN"])
+    def buildByProject() {
     }
 
-    @Secured(["ROLE_USER"])
-    def buildByProject(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        [reportInstanceList: Report.list(params), reportInstanceTotal: Report.count()]
-    }
-
-    @Secured(["ROLE_USER"])
-    def buildCriticalProjects(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+    @Secured(["ROLE_ADMIN"])
+    def buildCriticalProjects() {
         def result = reportService.buildCritcalProjectsReport()
         render (view: 'criticalProjects', model: [result: result, resultTotal: result.size(), params: params])
 
     }
 
-    @Secured(["ROLE_USER"])
+    @Secured(["ROLE_ADMIN"])
     def buildReport() {
-        def result = null
 
-        if (params.user == null && params.project == null) {
-            flash.message = message(code: 'error.user.project.mandatory.message')
-            redirect(action: "build")
-            return
-        }
+        def result = null
 
         if (!params.dateFrom) {
             flash.message = message(code: 'error.date.from.mandatory.message')
-            redirect(action: "build")
+            redirect(uri: "/")
             return
+
         } else {
-            normalizeDates(params)
+            convertDates(params)
         }
 
-
-        if (params.user != null && params.project != null) {
-            def user = User.get(params.user)
-            def project = Project.get(params.project)
-            result = reportService.buildUserAndProjectReport(user, project, params.dateFrom, params.dateTo)
-
-        } else if (params.project) {
+        if (params.buildBy == 'project') {
             def project = Project.get(params.project)
             result = reportService.buildProjectReport(project, params.dateFrom, params.dateTo)
 
-        } else if (params.user) {
+        } else if (params.buildBy == 'user') {
             def user = User.get(params.user)
             result = reportService.buildUserReport(user, params.dateFrom, params.dateTo)
         }
-
         render (view: 'result', model: [result: result, resultTotal: result.size()])
     }
 
 
-    private normalizeDates (params) {
+    private convertDates(params) {
 
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy")
+
+        String dateFromString = params.dateFrom
+        def Date dateFrom = formatter.parse(dateFromString)
+        params.dateFrom = dateFrom
 
         if (!params.dateTo){
             params.dateTo = new Date()
@@ -83,12 +67,6 @@ class ReportController {
             def Date dateTo = formatter.parse(dateToString)
             params.dateTo = dateTo
         }
-
-        String dateFromString = params.dateFrom
-        def Date dateFrom = formatter.parse(dateFromString)
-        params.dateFrom = dateFrom
-
         params
-
     }
 }

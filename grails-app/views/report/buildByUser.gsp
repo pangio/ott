@@ -41,14 +41,18 @@
 <body>
 
 <g:form method="post">
+
+    <g:hiddenField name="buildBy" value="user"></g:hiddenField>
+
     <fieldset class="form">
 
         %{-- users--}%
         <div class="fieldcontain">
             <label for="user">
                 <g:message code="default.user.label" default="User"/>
+                <span class="required-indicator">*</span>
             </label>
-            <g:select oninvalid="user" name="user" from="${com.pangio.ott.user.User.list()}" optionKey="id" size="5"
+            <g:select oninvalid="user" name="user" from="${com.pangio.ott.user.User.list()}" required="" optionKey="id" size="5"
                       class="many-to-many chosen"/>
         </div>
 
