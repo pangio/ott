@@ -29,7 +29,8 @@ class ReportController {
     @Secured(["ROLE_ADMIN"])
     def buildReport() {
 
-        def result = null
+        def Map result = null
+        def total=0
 
         if (!params.dateFrom) {
             flash.message = message(code: 'error.date.from.mandatory.message')
@@ -43,14 +44,19 @@ class ReportController {
         if (params.buildBy == 'project') {
             def project = Project.get(params.project)
             result = reportService.buildProjectReport(project, params.dateFrom, params.dateTo)
+            total = result.timeSheets.size()
 
         } else if (params.buildBy == 'user') {
             def user = User.get(params.user)
             result = reportService.buildUserReport(user, params.dateFrom, params.dateTo)
-        }
-        render (view: 'result', model: [result: result, resultTotal: result.size()])
-    }
+            total = result.timeSheets.size()
 
+        } else {
+            flash.message = message(code: 'error.report.not.found.message')
+            redirect(uri: "/")
+        }
+        render (view: 'result', model: [result: result.timeSheets, totalHours: result.totalHours, totalExtraHours: result.totalExtraHours, total: total])
+    }
 
     private convertDates(params) {
 

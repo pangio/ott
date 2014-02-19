@@ -37,12 +37,18 @@
                     <td><g:formatDate date="${resultInstance.date}" type="date" style="SHORT"/></td>
                 </tr>
             </g:each>
+                <td><strong>Total</strong></td>
+                <td></td>
+                <td></td>
+                <td><strong>${totalHours}</strong></td>
+                <td><strong>${totalExtraHours}</strong></td>
+                <td></td>
             </tbody>
         </table>
     </div>
 
     <div class="pagination">
-        <g:paginate total="${resultTotal}" />
+        <g:paginate total="${total}" />
     </div>
     <g:link class="btn btn-info" action="build"><g:message code="build.new.report.label"/></g:link>
 </div>
