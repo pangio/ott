@@ -8,16 +8,15 @@ class TimeSheetService {
 
     }
 
-    def getAllTimesheetsByUser(Long userId) {
-
-        def user = User.get(userId)
-        def reportItems = new ArrayList<TimeSheet>()
-        def allReportItems = TimeSheet.findAll()
-        allReportItems.each {
-            if (it.user.equals(user))
-                reportItems.add(it)
-        }
-        return reportItems
+    def findTimesheetsByUser(User user) {
+        def userTimesheets = TimeSheet.findAllByUser(user)
+        return userTimesheets
 
     }
+
+    def findTimesheetsByUserAndProject(User user, Project project) {
+        def userTimesheets = TimeSheet.findAllByUserAndProject(user, project)
+        return userTimesheets
+    }
+
 }

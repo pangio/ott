@@ -23,15 +23,15 @@ class TimeSheetController {
         params.max = Math.min(max ?: 10, 100)
 
         def springUser = springSecurityService.getPrincipal()
-        def userInstance = User.get(springUser.id)
-        def assignedProjects = projectService.getAssignedProjects(userInstance.id)
+        def user = User.get(springUser.id)
+        def assignedProjects = projectService.getAssignedProjects(user.id)
 
-        // TODO get and send to view one list per project
-        // TODO fix view to support it
-        def reportItems = new ArrayList<TimeSheet>()
-        reportItems = timeSheetService.getAllTimesheetsByUser(userInstance.id)
+        LinkedHashMap<String, Object> map = new LinkedHashMap<>()
 
-        [reportItemInstanceList: reportItems, reportItemInstanceTotal: reportItems.size(), assignedProjects: assignedProjects]
+        assignedProjects.each {
+            map.put(it.id, timeSheetService.findTimesheetsByUserAndProject(user, it))
+        }
+        [map: map]
     }
 
     @Secured(["ROLE_USER"])

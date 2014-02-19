@@ -14,6 +14,7 @@ class TimeSheet {
 
     static constraints = {
         hours min: 0L
+        extra nullable: true
     }
 
 }

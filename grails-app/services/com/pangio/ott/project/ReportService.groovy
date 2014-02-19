@@ -37,6 +37,7 @@ class ReportService {
     }
 
     def Map buildProjectReport (Project project, Date dateFrom, Date dateTo) {
+        // check - findByProject not working
         List<TimeSheet> timeSheets =  TimeSheet.findAllByProjectAndDateBetween(project, dateFrom, dateTo)
         LinkedHashMap<String, Object> resultMap = calculateHours(timeSheets)
         return resultMap
@@ -44,8 +45,8 @@ class ReportService {
     }
 
     private LinkedHashMap<String, Object> calculateHours(List<TimeSheet> timeSheets) {
-        Long totalHours = 0
-        Long totalExtraHours = 0
+        Long totalHours = 0L
+        Long totalExtraHours = 0L
 
         timeSheets.each {
             totalHours += it.hours

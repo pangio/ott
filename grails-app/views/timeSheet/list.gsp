@@ -1,4 +1,4 @@
-<%@ page import="com.pangio.ott.project.TimeSheet" %>
+<%@ page import="com.pangio.ott.project.Project; com.pangio.ott.project.Project" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,25 +13,23 @@
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
-    <g:each in="${assignedProjects}" status="i" var="projectInstance">
-        <div class="accordion" id="accordion-${projectInstance.name}">
+    <g:each in="${map}" status="i" var="mapEntry">
+        <div class="accordion" id="accordion-${mapEntry.key}">
             <div class="accordion-group">
                 <div class="accordion-heading">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-${projectInstance.id}"
-                       href="#collapse-${projectInstance.id}">
-                        <div class="message span10" role="status">${projectInstance.name}</div>
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-${mapEntry.key}"
+                       href="#collapse-${mapEntry.key}">
+                        <div class="message span10" role="status">${Project.get(mapEntry.key).name}</div>
                     </a>
-                    <g:link class="btn btn-info" action="create" params="[projectId: projectInstance.id]">
+                    <g:link class="btn btn-info" action="create" params="[projectId: mapEntry.key]">
                         <g:message code="default.button.hours.submit.label"/>
                     </g:link>
                 </div>
-
-                <div id="collapse-${projectInstance.id}" class="accordion-body collapse in">
+                <div id="collapse-${mapEntry.key}" class="accordion-body collapse in">
                     <div class="accordion-inner">
-                        <div class="message" role="status">${projectInstance.description}</div>
+                        <div class="message" role="status">${Project.get(mapEntry.key).description}</div>
                     </div>
-
-                    <g:if test="${reportItemInstanceList != null && !reportItemInstanceList.isEmpty()}">
+                    <g:if test="${mapEntry.value != null && !((ArrayList)mapEntry.value).isEmpty()}">
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
@@ -44,20 +42,18 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <g:each in="${reportItemInstanceList}" status="ri" var="reportItemInstance">
 
-                                    <g:if test="${reportItemInstance.project.name == projectInstance.name}">
-                                        <tr class="${(ri % 2) == 0 ? 'even' : 'odd'}">
-                                            <td>${fieldValue(bean: reportItemInstance, field: "task")}</td>
-                                            <td>${fieldValue(bean: reportItemInstance, field: "hours")}</td>
-                                            <td>${fieldValue(bean: reportItemInstance, field: "extra")}</td>
-                                            <td><g:formatDate date="${reportItemInstance.date}" type="date" style="SHORT"/></td>
-                                            <td>${fieldValue(bean: reportItemInstance, field: "comments")}</td>
-                                        </tr>
-                                    </g:if>
+                                <g:each in="${mapEntry.value}" status="ri" var="timesheet">
+                                    <tr class="${(ri % 2) == 0 ? 'even' : 'odd'}">
+                                        <td>${fieldValue(bean: timesheet, field: "task")}</td>
+                                        <td>${fieldValue(bean: timesheet, field: "hours")}</td>
+                                        <td>${fieldValue(bean: timesheet, field: "extra")}</td>
+                                        <td><g:formatDate date="${timesheet.date}" type="date" style="SHORT"/></td>
+                                        <td>${fieldValue(bean: timesheet, field: "comments")}</td>
+                                    </tr>
                                 </g:each>
                                 </tbody>
-                          </table>
+                            </table>
                         </div>
                     </g:if>
                     <g:else>
