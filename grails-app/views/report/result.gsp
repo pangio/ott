@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'ott.report.label', default: 'REPORT')}" />
+    <g:set var="entityName" value="${message(code: 'ott.report.label', default: 'Report')}" />
     <title><g:message code="default.list.label" args="[entityName]" /></title>
 </head>
 <body>
@@ -50,7 +50,7 @@
     <div class="pagination">
         <g:paginate total="${total}" />
     </div>
-    <g:link class="btn btn-info" action="build"><g:message code="ott.build.new.report.label"/></g:link>
+    <g:link class="btn btn-info" action="buildBy${params.buildBy}"><g:message code="ott.build.new.report.label"/></g:link>
 </div>
 </body>
 </html>

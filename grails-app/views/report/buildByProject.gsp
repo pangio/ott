@@ -42,7 +42,7 @@
 
 <g:form method="post">
 
-    <g:hiddenField name="buildBy" value="project"></g:hiddenField>
+    <g:hiddenField name="buildBy" value="Project"></g:hiddenField>
 
     <fieldset class="form">
 

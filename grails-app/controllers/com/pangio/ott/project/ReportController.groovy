@@ -41,12 +41,12 @@ class ReportController {
             convertDates(params)
         }
 
-        if (params.buildBy == 'project') {
+        if (params.buildBy == 'Project') {
             def project = Project.get(params.project)
             result = reportService.buildProjectReport(project, params.dateFrom, params.dateTo)
             total = result.timeSheets.size()
 
-        } else if (params.buildBy == 'user') {
+        } else if (params.buildBy == 'User') {
             def user = User.get(params.user)
             result = reportService.buildUserReport(user, params.dateFrom, params.dateTo)
             total = result.timeSheets.size()
