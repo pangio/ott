@@ -3,11 +3,11 @@
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'default.user.label', default: 'User')}"/>
+    <g:set var="entityName" value="${message(code: 'ott.user.label', default: 'User')}"/>
     <title><g:message code="default.show.label" args="[entityName]"/></title>
 </head>
 <body>
-<h1><g:message code="welcome.user.label" args="[entityName]"/></h1>
+<h1><g:message code="ott.welcome.user.label" args="[entityName]"/></h1>
 <div>
     <p>Welcome "${userInstance?.name}",</p>
     <p>Your registration was successful.</p>

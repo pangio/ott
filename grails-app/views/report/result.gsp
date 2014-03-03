@@ -17,12 +17,12 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <g:sortableColumn property="user" title="${message(code: 'default.user.label', default: 'User')}" />
-                <g:sortableColumn property="project" title="${message(code: 'default.project.label', default: 'Project')}" />
-                <g:sortableColumn property="task" title="${message(code: 'default.task.label', default: 'Task')}" />
-                <g:sortableColumn property="hours" title="${message(code: 'default.hours.label', default: 'Hours')}" />
-                <g:sortableColumn property="extra" title="${message(code: 'default.extra.label', default: 'Extra')}" />
-                <g:sortableColumn property="date" title="${message(code: 'default.date.label', default: 'Date')}" />
+                <g:sortableColumn property="user" title="${message(code: 'ott.user.label', default: 'User')}" />
+                <g:sortableColumn property="project" title="${message(code: 'ott.project.label', default: 'Project')}" />
+                <g:sortableColumn property="task" title="${message(code: 'ott.task.label', default: 'Task')}" />
+                <g:sortableColumn property="hours" title="${message(code: 'ott.timesheet.label', default: 'Hours')}" />
+                <g:sortableColumn property="extra" title="${message(code: 'ott.extra.label', default: 'Extra')}" />
+                <g:sortableColumn property="date" title="${message(code: 'ott.date.label', default: 'Date')}" />
             </tr>
             </thead>
             <tbody>
@@ -50,7 +50,7 @@
     <div class="pagination">
         <g:paginate total="${total}" />
     </div>
-    <g:link class="btn btn-info" action="build"><g:message code="build.new.report.label"/></g:link>
+    <g:link class="btn btn-info" action="build"><g:message code="ott.build.new.report.label"/></g:link>
 </div>
 </body>
 </html>

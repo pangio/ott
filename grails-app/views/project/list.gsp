@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'default.project.label', default: 'Project')}" />
+		<g:set var="entityName" value="${message(code: 'ott.project.label', default: 'Project')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -17,8 +17,8 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <g:sortableColumn property="name" title="${message(code: 'default.name.label', default: 'Name')}" />
-                            <g:sortableColumn property="description" title="${message(code: 'default.description.label', default: 'Description')}" />
+                            <g:sortableColumn property="name" title="${message(code: 'ott.name.label', default: 'Name')}" />
+                            <g:sortableColumn property="description" title="${message(code: 'ott.description.label', default: 'Description')}" />
                         </tr>
                     </thead>
                     <tbody>
@@ -36,7 +36,7 @@
             <div class="pagination">
 				<g:paginate total="${projectInstanceTotal}" />
 			</div>
-            <g:link class="btn btn-info" action="create"><g:message code="default.new.project.label"/></g:link>
+            <g:link class="btn btn-info" action="create"><g:message code="ott.new.project.label"/></g:link>
 		</div>
 	</body>
 </html>

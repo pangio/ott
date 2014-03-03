@@ -85,11 +85,11 @@
                                 %{--<ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">--}%
                             <ul class="nav pull-right">
                                 <li class="dropdown pull-right"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <g:message code="welcome.user.label"/> <sec:loggedInUserInfo field='username'/>
+                                    <g:message code="ott.welcome.user.label"/> <sec:loggedInUserInfo field='username'/>
                                     <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                        <li><g:link controller="user" action="profile"><g:message code="default.profile.label"/></g:link></li>
-                                        <li><g:link controller="logout" action="index"><g:message code="default.logout.label"/></g:link></li>
+                                        <li><g:link controller="user" action="profile"><g:message code="ott.profile.label"/></g:link></li>
+                                        <li><g:link controller="logout" action="index"><g:message code="ott.logout.label"/></g:link></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -98,8 +98,8 @@
                         </sec:ifLoggedIn>
                         <sec:ifNotLoggedIn>
                             <p class="navbar-text pull-right">
-                                <g:link controller="login" action="index"><g:message code="default.login.label"/></g:link>
-                                <g:link controller="user" action="register"><g:message code="default.register.label"/></g:link>
+                                <g:link controller="login" action="index"><g:message code="ott.login.label"/></g:link>
+                                <g:link controller="user" action="register"><g:message code="ott.register.label"/></g:link>
                             </p>
                         </sec:ifNotLoggedIn>
                     </div>

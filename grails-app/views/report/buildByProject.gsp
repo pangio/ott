@@ -49,7 +49,7 @@
         %{-- projects--}%
         <div class="fieldcontain">
             <label for="project">
-                <g:message code="default.project.label" default="Project"/>
+                <g:message code="ott.project.label" default="Project"/>
                 <span class="required-indicator">*</span>
             </label>
             <g:select oninvalid="project" name="project" required="" from="${com.pangio.ott.project.Project.list()}" optionKey="id" size="5" class="many-to-many chosen"/>
@@ -74,7 +74,7 @@
 
     </fieldset>
     <fieldset class="buttons">
-        <g:actionSubmit class="btn btn-info" action="buildReport" value="${message(code: 'report.build.label', default: 'Build Report')}" />
+        <g:actionSubmit class="btn btn-info" action="buildReport" value="${message(code: 'ott.report.build.label', default: 'Build Report')}" />
     </fieldset>
 </g:form>
 

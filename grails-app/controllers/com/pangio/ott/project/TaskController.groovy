@@ -29,7 +29,7 @@ class TaskController {
             render(view: "create", model: [taskInstance: taskInstance])
             return
         }
-        flash.message = message(code: 'default.created.message', args: [message(code: 'default.task.label', default: 'Task'), taskInstance.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'ott.task.label', default: 'Task'), taskInstance.id])
         redirect(action: "show", id: taskInstance.id)
     }
 
@@ -37,7 +37,7 @@ class TaskController {
     def edit(Long id) {
         def taskInstance = Task.get(params.id)
         if (!taskInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.task.label', default: 'Task'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'ott.task.label', default: 'Task'), id])
             redirect(action: "list")
             return
         }
@@ -48,7 +48,7 @@ class TaskController {
     def update(Long id) {
         def taskInstance = Task.get(id)
         if (!taskInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.task.label', default: 'Task'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'ott.task.label', default: 'Task'), id])
             redirect(action: "list")
             return
         }
@@ -57,14 +57,14 @@ class TaskController {
             render(view: "edit", model: [taskInstance: taskInstance])
             return
         }
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'default.task.label', default: 'Task'), taskInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'ott.task.label', default: 'Task'), taskInstance.id])
         redirect(action: "show", id: taskInstance.id)
     }
 
     def show(Long id) {
         def taskInstance = Task.get(id)
         if (!taskInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.task.label', default: 'Task'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'ott.task.label', default: 'Task'), id])
             redirect(action: "list")
             return
         }
@@ -75,17 +75,17 @@ class TaskController {
     def delete(Long id) {
         def taskInstance = Task.get(id)
         if (!taskInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.task.label', default: 'Task'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'ott.task.label', default: 'Task'), id])
             redirect(action: "list")
             return
         }
         try {
             taskInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'default.task.label', default: 'Task'), id])
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'ott.task.label', default: 'Task'), id])
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'default.task.label', default: 'Task'), id])
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'ott.task.label', default: 'Task'), id])
             redirect(action: "show", id: id)
         }
     }

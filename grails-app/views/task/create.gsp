@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'default.task.label', default: 'Task')}" />
+		<g:set var="entityName" value="${message(code: 'ott.task.label', default: 'Task')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -24,7 +24,7 @@
 					<g:render template="form"/>
 				</fieldset>
 				<fieldset class="buttons">
-					<g:submitButton name="create" class="btn btn-success" value="${message(code: 'button.done.label', default: 'Done')}" onclick="return confirm('${message(code: 'button.befor.task.done.confirmation.label', default: 'This taks can not been modified later')}');"/>
+					<g:submitButton name="create" class="btn btn-success" value="${message(code: 'ott.button.done.label', default: 'Done')}" onclick="return confirm('${message(code: 'ott.button.befor.task.done.confirmation.label', default: 'This taks can not been modified later')}');"/>
 				</fieldset>
 			</g:form>
 		</div>

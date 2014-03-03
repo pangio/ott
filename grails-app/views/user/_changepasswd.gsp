@@ -26,7 +26,7 @@
              <tr class="fieldcontain ${hasErrors(bean: user, field: 'password', 'error')} required">
                 <td class="first-column">
                     <label for="password">
-                        <g:message code="default.password.label" default="Password"/>
+                        <g:message code="ott.password.label" default="Password"/>
                         <span class="required-indicator">*</span>
                     </label>
                 </td>
@@ -57,7 +57,7 @@
                 </td>
             </tr>
           </table>
-            <input type="submit" class="button radius save" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+            <input type="submit" class="button radius save" value="${message(code: 'ott.button.update.label', default: 'Update')}" />
         </fieldset>
     </g:formRemote>
 </div>

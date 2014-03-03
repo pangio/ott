@@ -33,7 +33,7 @@ class UserController {
             render(view: "register", model: [userInstance: userInstance])
             return
         }
-        flash.message = message(code: 'default.created.message', args: [message(code: 'default.user.label', default: 'User'), userInstance.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'ott.user.label', default: 'User'), userInstance.id])
         redirect(action: "welcome", id: userInstance.id)
     }
 
@@ -41,7 +41,7 @@ class UserController {
     def welcome(Long id) {
         def userInstance = User.get(id)
         if (!userInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.user.label', default: 'User'), params.id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'ott.user.label', default: 'User'), params.id])
             redirect(action: "list")
             return
         }
@@ -54,7 +54,7 @@ class UserController {
         def userInstance = User.get(springUser.id)
 
         if (!userInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.user.label', default: 'User'), params.id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'ott.user.label', default: 'User'), params.id])
             redirect(action: "list")
             return
         }
@@ -68,7 +68,7 @@ class UserController {
 //        def userInstance = User.get(springUser.id)
 //
 //        if (!userInstance) {
-//            flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.user.label', default: 'User'), params.id])
+//            flash.message = message(code: 'default.not.found.message', args: [message(code: 'ott.user.label', default: 'User'), params.id])
 //            redirect(action: "list")
 //            return
 //        }
@@ -79,7 +79,7 @@ class UserController {
     def edit() {
         def userInstance = User.get(params.id)
         if (!userInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.user.label', default: 'User'), params.id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'ott.user.label', default: 'User'), params.id])
             redirect(action: "list")
             return
         }
@@ -90,7 +90,7 @@ class UserController {
     def update() {
         def userInstance = User.get(params.id)
         if (!userInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.user.label', default: 'User'), params.id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'ott.user.label', default: 'User'), params.id])
             redirect ("/")
             return
         }
@@ -99,7 +99,7 @@ class UserController {
             render(view: "edit", model: [userInstance: userInstance])
             return
         }
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'default.user.label', default: 'User'), userInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'ott.user.label', default: 'User'), userInstance.id])
         redirect(action: "profile")
     }
 
@@ -107,17 +107,17 @@ class UserController {
     def delete() {
         def userInstance = User.get(params.id)
         if (!userInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.user.label', default: 'User'), params.id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'ott.user.label', default: 'User'), params.id])
             redirect(action: "list")
             return
         }
         try {
             userInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'default.user.label', default: 'User'), params.id])
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'ott.user.label', default: 'User'), params.id])
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'default.user.label', default: 'User'), params.id])
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'ott.user.label', default: 'User'), params.id])
             redirect(action: "profile", id: params.id)
         }
     }

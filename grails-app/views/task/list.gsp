@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'default.task.label', default: 'Task')}" />
+		<g:set var="entityName" value="${message(code: 'ott.task.label', default: 'Task')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -17,7 +17,7 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <g:sortableColumn property="name" title="${message(code: 'default.name.label', default: 'Name')}" />
+                            <g:sortableColumn property="name" title="${message(code: 'ott.name.label', default: 'Name')}" />
                         </tr>
                     </thead>
                     <tbody>
@@ -32,7 +32,7 @@
 			<div class="pagination">
 				<g:paginate total="${taskInstanceTotal}" />
 			</div>
-            <g:link class="btn btn-info" action="create"><g:message code="default.new.task.label"/></g:link>
+            <g:link class="btn btn-info" action="create"><g:message code="ott.new.task.label"/></g:link>
         </div>
 	</body>
 </html>

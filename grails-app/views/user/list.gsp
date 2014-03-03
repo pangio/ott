@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'default.user.label', default: 'User')}" />
+		<g:set var="entityName" value="${message(code: 'ott.user.label', default: 'User')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -18,9 +18,9 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <g:sortableColumn property="name" title="${message(code: 'default.name.label', default: 'Name')}" />
-                        <g:sortableColumn property="lastName" title="${message(code: 'default.name.label', default: 'Last Name')}" />
-                        <g:sortableColumn property="email" title="${message(code: 'default.name.label', default: 'Email')}" />
+                        <g:sortableColumn property="name" title="${message(code: 'ott.name.label', default: 'Name')}" />
+                        <g:sortableColumn property="lastName" title="${message(code: 'ott.name.label', default: 'Last Name')}" />
+                        <g:sortableColumn property="email" title="${message(code: 'ott.name.label', default: 'Email')}" />
                     </tr>
                     </thead>
                     <tbody>

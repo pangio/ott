@@ -33,7 +33,7 @@ class ReportController {
         def total=0
 
         if (!params.dateFrom) {
-            flash.message = message(code: 'error.date.from.mandatory.message')
+            flash.message = message(code: 'ott.error.date.from.mandatory.message')
             redirect(uri: "/")
             return
 
@@ -52,7 +52,7 @@ class ReportController {
             total = result.timeSheets.size()
 
         } else {
-            flash.message = message(code: 'error.report.not.found.message')
+            flash.message = message(code: 'ott.error.report.not.found.message')
             redirect(uri: "/")
         }
         render (view: 'result', model: [result: result.timeSheets, totalHours: result.totalHours, totalExtraHours: result.totalExtraHours, total: total])

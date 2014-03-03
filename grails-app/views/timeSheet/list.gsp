@@ -22,7 +22,7 @@
                         <div class="message span10" role="status">${Project.get(mapEntry.key).name}</div>
                     </a>
                     <g:link class="btn btn-info" action="create" params="[projectId: mapEntry.key]">
-                        <g:message code="default.button.hours.submit.label"/>
+                        <g:message code="ott.button.timesheet.submit.label"/>
                     </g:link>
                 </div>
                 <div id="collapse-${mapEntry.key}" class="accordion-body collapse in">
@@ -34,11 +34,11 @@
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <g:sortableColumn property="task" title="${message(code: 'default.task.label', default: 'Task')}"/>
-                                    <g:sortableColumn property="hours" title="${message(code: 'default.hours.label', default: 'Hours')}"/>
-                                    <g:sortableColumn property="extra" title="${message(code: 'default.extra.label', default: 'Extra')}"/>
-                                    <g:sortableColumn property="date" title="${message(code: 'default.date.label', default: 'Date')}"/>
-                                    <g:sortableColumn property="comments" title="${message(code: 'default.comments.label', default: 'Comments')}"/>
+                                    <g:sortableColumn property="task" title="${message(code: 'ott.task.label', default: 'Task')}"/>
+                                    <g:sortableColumn property="hours" title="${message(code: 'ott.timesheet.label', default: 'Hours')}"/>
+                                    <g:sortableColumn property="extra" title="${message(code: 'ott.extra.label', default: 'Extra')}"/>
+                                    <g:sortableColumn property="date" title="${message(code: 'ott.date.label', default: 'Date')}"/>
+                                    <g:sortableColumn property="comments" title="${message(code: 'ott.comments.label', default: 'Comments')}"/>
                                 </tr>
                                 </thead>
                                 <tbody>

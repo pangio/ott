@@ -17,8 +17,8 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <g:sortableColumn property="name" title="${message(code: 'default.name.label', default: 'Name')}" />
-                <g:sortableColumn property="description" title="${message(code: 'default.description.label', default: 'Description')}" />
+                <g:sortableColumn property="name" title="${message(code: 'ott.name.label', default: 'Name')}" />
+                <g:sortableColumn property="description" title="${message(code: 'ott.description.label', default: 'Description')}" />
             </tr>
             </thead>
             <tbody>
@@ -36,7 +36,7 @@
     <div class="pagination">
         <g:paginate total="${resultTotal}" />
     </div>
-    <g:link class="btn btn-info" action="build"><g:message code="build.new.report.label"/></g:link>
+    <g:link class="btn btn-info" action="build"><g:message code="ott.build.new.report.label"/></g:link>
 </div>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'default.user.label', default: 'user')}" />
+		<g:set var="entityName" value="${message(code: 'ott.user.label', default: 'user')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -26,7 +26,7 @@
                     <div class="span6">
                         <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'password', 'error')} ">
                             <label for="password">
-                                <g:message code="default.password.label" default="password" />
+                                <g:message code="ott.password.label" default="password" />
                             </label>
                             <g:passwordField name="password" value="${userInstance?.password}"/>
                         </div>

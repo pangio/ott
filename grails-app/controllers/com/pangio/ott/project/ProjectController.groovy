@@ -29,14 +29,14 @@ class ProjectController {
             render(view: "create", model: [projectInstance: projectInstance])
             return
         }
-        flash.message = message(code: 'default.created.message', args: [message(code: 'default.project.label', default: 'Project'), projectInstance.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'ott.project.label', default: 'Project'), projectInstance.id])
         redirect(action: "show", id: projectInstance.id)
     }
 
     def show(Long id) {
         def projectInstance = Project.get(id)
         if (!projectInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.project.label', default: 'Project'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'ott.project.label', default: 'Project'), id])
             redirect(action: "list")
             return
         }
@@ -47,7 +47,7 @@ class ProjectController {
     def edit(Long id) {
         def projectInstance = Project.get(params.id)
         if (!projectInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.project.label', default: 'Project'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'ott.project.label', default: 'Project'), id])
             redirect(action: "list")
             return
         }
@@ -58,7 +58,7 @@ class ProjectController {
     def update(Long id) {
         def projectInstance = Project.get(id)
         if (!projectInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.project.label', default: 'Project'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'ott.project.label', default: 'Project'), id])
             redirect(action: "list")
             return
         }
@@ -67,7 +67,7 @@ class ProjectController {
             render(view: "edit", model: [projectInstance: projectInstance])
             return
         }
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'default.project.label', default: 'Project'), projectInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'ott.project.label', default: 'Project'), projectInstance.id])
         redirect(action: "show", id: projectInstance.id)
     }
 
@@ -75,17 +75,17 @@ class ProjectController {
     def delete(Long id) {
         def projectInstance = Project.get(id)
         if (!projectInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'default.project.label', default: 'Project'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'ott.project.label', default: 'Project'), id])
             redirect(action: "list")
             return
         }
         try {
             projectInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'default.project.label', default: 'Project'), id])
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'ott.project.label', default: 'Project'), id])
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'default.project.label', default: 'Project'), id])
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'ott.project.label', default: 'Project'), id])
             redirect(action: "show", id: id)
         }
     }
