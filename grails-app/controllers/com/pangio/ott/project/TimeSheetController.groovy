@@ -36,7 +36,7 @@ class TimeSheetController {
 
     @Secured(["ROLE_USER"])
     def create() {
-        [reportItemInstance: new TimeSheet(params)]
+        [timeSheetInstance: new TimeSheet(params)]
     }
 
     @Secured(["ROLE_USER"])
@@ -44,80 +44,80 @@ class TimeSheetController {
 
         Long limit = grailsApplication.config.ott.extraHoursLimit
 
-        def reportItemInstance = new TimeSheet(params)
+        def timeSheetInstance = new TimeSheet(params)
         def springUser = springSecurityService.getPrincipal()
         def userInstance = User.get(springUser.id)
-        reportItemInstance.user = userInstance
-        reportItemInstance.project = Project.get(params.projectId)
+        timeSheetInstance.user = userInstance
+        timeSheetInstance.project = Project.get(params.projectId)
 
-        if (reportItemInstance.hours > limit){
-            reportItemInstance.extra = new Long(params.hours) - new Long(limit)
+        if (timeSheetInstance.hours > limit){
+            timeSheetInstance.extra = new Long(params.hours) - new Long(limit)
         }
 
-        if (!reportItemInstance.save(flush: true)) {
-            render(view: "create", model: [reportItemInstance: reportItemInstance])
+        if (!timeSheetInstance.save(flush: true)) {
+            render(view: "create", model: [timeSheetInstance: timeSheetInstance])
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'reportItem.label', default: 'TimeSheet'), reportItemInstance.id])
-        redirect(action: "show", id: reportItemInstance.id)
+        flash.message = message(code: 'default.created.message', args: [message(code: 'ott.timesheet.label', default: 'TimeSheet'), timeSheetInstance.id])
+        redirect(action: "show", id: timeSheetInstance.id)
     }
 
 // TODO    ELIMINAR, AFTER CREATE REDIRECT AL LIST
     @Secured(["ROLE_USER"])
     def show(Long id) {
-        def reportItemInstance = TimeSheet.get(id)
-        if (!reportItemInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'reportItem.label', default: 'TimeSheet'), id])
+        def timeSheetInstance = TimeSheet.get(id)
+        if (!timeSheetInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'ott.timesheet.label', default: 'TimeSheet'), id])
             redirect(action: "list")
             return
         }
 
-        [reportItemInstance: reportItemInstance]
+        [timeSheetInstance: timeSheetInstance]
     }
 
 //    TODO SOLO DEJAR EDITAR EL COMENTARIO
     @Secured(["ROLE_USER"])
     def edit(Long id) {
-        def reportItemInstance = TimeSheet.get(id)
-        if (!reportItemInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'reportItem.label', default: 'TimeSheet'), id])
+        def timeSheetInstance = TimeSheet.get(id)
+        if (!timeSheetInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'ott.timesheet.label', default: 'TimeSheet'), id])
             redirect(action: "list")
             return
         }
 
-        [reportItemInstance: reportItemInstance]
+        [timeSheetInstance: timeSheetInstance]
     }
 
 //    TODO LIMPIAR CODIGO
     @Secured(["ROLE_USER"])
     def update(Long id, Long version) {
-        def reportItemInstance = TimeSheet.get(id)
-        if (!reportItemInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'reportItem.label', default: 'TimeSheet'), id])
+        def timeSheetInstance = TimeSheet.get(id)
+        if (!timeSheetInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'ott.timesheet.label', default: 'TimeSheet'), id])
             redirect(action: "list")
             return
         }
 
         if (version != null) {
-            if (reportItemInstance.version > version) {
-                reportItemInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [message(code: 'reportItem.label', default: 'TimeSheet')] as Object[],
+            if (timeSheetInstance.version > version) {
+                timeSheetInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+                        [message(code: 'ott.timesheet.label', default: 'TimeSheet')] as Object[],
                         "Another user has updated this TimeSheet while you were editing")
-                render(view: "edit", model: [reportItemInstance: reportItemInstance])
+                render(view: "edit", model: [timeSheetInstance: timeSheetInstance])
                 return
             }
         }
 
-        reportItemInstance.properties = params
+        timeSheetInstance.properties = params
 
-        if (!reportItemInstance.save(flush: true)) {
-            render(view: "edit", model: [reportItemInstance: reportItemInstance])
+        if (!timeSheetInstance.save(flush: true)) {
+            render(view: "edit", model: [timeSheetInstance: timeSheetInstance])
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'reportItem.label', default: 'TimeSheet'), reportItemInstance.id])
-        redirect(action: "show", id: reportItemInstance.id)
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'ott.timesheet.label', default: 'TimeSheet'), timeSheetInstance.id])
+        redirect(action: "show", id: timeSheetInstance.id)
     }
 
 }

@@ -22,35 +22,35 @@
     });
 </r:script>
 
-<div class="fieldcontain ${hasErrors(bean: reportItemInstance, field: 'comments', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: timeSheetInstance, field: 'comments', 'error')} ">
 	<label for="comments">
-		<g:message code="reportItem.comments.label" default="Comments" />
+		<g:message code="ott.comments.label" default="Comments" />
 		
 	</label>
-	<g:textField name="comments" value="${reportItemInstance?.comments}"/>
+	<g:textField name="comments" value="${timeSheetInstance?.comments}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: reportItemInstance, field: 'hours', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: timeSheetInstance, field: 'hours', 'error')} required">
 	<label for="hours">
-		<g:message code="reportItem.hours.label" default="Hours" />
+		<g:message code="ott.hours.label" default="Hours" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="hours" type="number" value="${reportItemInstance.hours}" required=""/>
+	<g:field name="hours" type="number" value="${timeSheetInstance.hours}" required=""/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: reportItemInstance, field: 'date', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: timeSheetInstance, field: 'date', 'error')} required">
 	<label for="date">
-		<g:message code="reportItem.date.label" default="Date" />
+		<g:message code="ott.date.label" default="Date" />
 		<span class="required-indicator">*</span>
 	</label>
-    <jqueryPicker:date name="date" id="date"  value="${reportItemInstance?.date}"  />
+    <jqueryPicker:date name="date" id="date"  value="${timeSheetInstance?.date}"  />
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: reportItemInstance, field: 'task', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: timeSheetInstance, field: 'task', 'error')} required">
 	<label for="task">
-		<g:message code="reportItem.task.label" default="Task" />
+		<g:message code="ott.task.label" default="Task" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="task" name="task.id" from="${com.pangio.ott.project.Task.list()}" optionKey="id" required="" value="${reportItemInstance?.task?.id}" class="many-to-one"/>
+	<g:select id="task" name="task.id" from="${com.pangio.ott.project.Task.list()}" optionKey="id" required="" value="${timeSheetInstance?.task?.id}" class="many-to-one"/>
 </div>
 
