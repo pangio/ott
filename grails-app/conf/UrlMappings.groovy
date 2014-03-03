@@ -12,6 +12,9 @@ class UrlMappings {
 
         "/login/$action?"(controller: "login")
         "/logout/$action?"(controller: "logout")
+
+        "/$action?"(controller: "home")
+
     }
 
 }
