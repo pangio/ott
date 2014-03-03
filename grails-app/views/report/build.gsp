@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'default.report.label', default: 'Report')}"/>
+    <g:set var="entityName" value="${message(code: 'ott.report.label', default: 'Report')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
 
     <r:require modules="chosen, timepicker"/>
@@ -65,7 +65,7 @@
         %{--date from--}%
         <div class="fieldcontain required">
             <label for="dateFrom">
-                <g:message code="default.date.from.label" default="Date From" />
+                <g:message code="ott.report.filter.date.from.label" default="Date From" />
                 <span class="required-indicator">*</span>
             </label>
             <jqueryPicker:date name="dateFrom" id="dateFrom" />
@@ -74,7 +74,7 @@
         %{--dateTo--}%
         <div class="fieldcontain">
             <label for="dateTo">
-                <g:message code="default.date.to.label" default="Date To" />
+                <g:message code="ott.report.filter.date.to.label" default="Date To" />
             </label>
             <jqueryPicker:date name="dateTo" id="dateTo" />
         </div>

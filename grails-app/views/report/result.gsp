@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'default.report.label', default: 'REPORT')}" />
+    <g:set var="entityName" value="${message(code: 'ott.report.label', default: 'REPORT')}" />
     <title><g:message code="default.list.label" args="[entityName]" /></title>
 </head>
 <body>
