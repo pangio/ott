@@ -21,8 +21,16 @@
 ## INSTALL:
 
 * clone repository
-* create MySQL db
-* setup DataSource.groovy with user/pass/schema
+```
+https://github.com/pangio/ott.git
+```
+* create MySQL schema on your local env (previously MySql installed)
+```
+schema name: 'ott' 
+user: 'root'
+pass: ''
+```
+* setup DataSource.groovy with schema/user/pass if you've created with different connection details
 * run the Time Tracker tool by executing 
 ```
 grails run-app
