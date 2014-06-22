@@ -1,4 +1,6 @@
 ## Open Time Tracker Management Tool
+Groovy/Grails Time-Tracker Management Tool integrated w/ Twitter Bootstrap & MySQL
+
 ===
 ## FEATURES:
 
