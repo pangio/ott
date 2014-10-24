@@ -14,22 +14,24 @@
         <div class="message" role="status">${flash.message}</div>
     </g:if>
     <g:each in="${map}" status="i" var="mapEntry">
-        <div class="accordion" id="accordion-${mapEntry.key}">
+        <div class="accordion message" id="accordion-${mapEntry.key}">
             <div class="accordion-group">
                 <div class="accordion-heading">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-${mapEntry.key}"
-                       href="#collapse-${mapEntry.key}">
-                        <div class="message span10" role="status">${Project.get(mapEntry.key).name}</div>
+                    <a>
+                        <div id="lalala" class="btn btn-info pull-right margin"role="status">
+                            <g:link action="create" params="[projectId: mapEntry.key]"><g:message code="ott.button.timesheet.submit.label"/></g:link>
+                        </div>
                     </a>
-                    <g:link class="btn btn-info" action="create" params="[projectId: mapEntry.key]">
-                        <g:message code="ott.button.timesheet.submit.label"/>
-                    </g:link>
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-${mapEntry.key}" href="#collapse-${mapEntry.key}">
+                        <div class="btn btn-info" role="status">${Project.get(mapEntry.key).name}</div>
+                    </a>
                 </div>
+
                 <div id="collapse-${mapEntry.key}" class="accordion-body collapse in">
                     <div class="accordion-inner">
                         <div class="message" role="status">${Project.get(mapEntry.key).description}</div>
                     </div>
-                    <g:if test="${mapEntry.value != null && !((ArrayList)mapEntry.value).isEmpty()}">
+                    <g:if test="${mapEntry.value != null && !((ArrayList) mapEntry.value).isEmpty()}">
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
@@ -57,8 +59,10 @@
                         </div>
                     </g:if>
                     <g:else>
-                        <div>
-                            No submits yet. Please submit your hours
+                        <div class="accordion-inner">
+                            <div class="message alert alert-info">
+                                <p>No submits yet. Please submit your hours</p>
+                            </div>
                         </div>
                     </g:else>
                 </div>

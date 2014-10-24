@@ -29,12 +29,17 @@ class UserController {
     @Secured(["IS_AUTHENTICATED_ANONYMOUSLY"])
     def save() {
         def userInstance = new User(params)
+
         if (!userInstance.save(flush: true)) {
+
+            def userRole = Role.findByAuthorityLike('ROLE_USER')
+            UserRole.create userInstance, userRole, true
+
             render(view: "register", model: [userInstance: userInstance])
             return
+            flash.message = message(code: 'default.created.message', args: [message(code: 'ott.user.label', default: 'User'), userInstance.id])
+            redirect(action: "welcome", id: userInstance.id)
         }
-        flash.message = message(code: 'default.created.message', args: [message(code: 'ott.user.label', default: 'User'), userInstance.id])
-        redirect(action: "welcome", id: userInstance.id)
     }
 
     @Secured("IS_AUTHENTICATED_ANONYMOUSLY")

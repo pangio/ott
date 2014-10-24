@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--[if IE]>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap/jquery.ui.1.8.16.ie.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/timetracker.css"/>
     <![endif]-->
     <link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
     <link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
